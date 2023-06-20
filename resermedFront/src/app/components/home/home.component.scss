@@ -2,3 +2,58 @@ body {
     margin: 0;
 }
 
+.lens {
+    fill: aqua;
+    width: 35px;
+    height: 35px;
+    z-index: inherit;
+}
+
+
+.searchBar {
+    width: 100%;
+    max-width: 500px;
+    min-width: 300px;
+    background-color: white;
+    border-radius: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#inputSearch {
+    border: 0;
+    outline: none;
+    background: transparent;
+    flex: 1;
+    padding: 10px 16px;
+    z-index: 1;
+} 
+
+#inputSearch:focus-visible {
+    box-shadow: none;
+}
+
+
+#btnSearch {
+    background-color: #cfcfcf;
+    padding: 20px;
+    border-radius: 40px;
+    border-style: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 3px;
+    z-index: 2;
+}
+
+.searchButton {
+    transition: opacity 0.10s ease-in-out;
+
+}
+
+.searchButton:hover {
+    opacity: 0.8;
+}
