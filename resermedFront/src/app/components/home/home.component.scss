@@ -1,24 +1,26 @@
-body {
-    margin: 0;
-}
+$font: 'Nunito',sans-serif;
 
-.lens {
-    fill: aqua;
-    width: 35px;
-    height: 35px;
-    z-index: inherit;
+.search-content {
+    font-family: $font;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -25%);
 }
-
 
 .searchBar {
-    width: 100%;
-    max-width: 500px;
-    min-width: 300px;
+    width: 40rem;
     background-color: white;
     border-radius: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #inputSearch {
@@ -27,7 +29,8 @@ body {
     background: transparent;
     flex: 1;
     padding: 10px 16px;
-    z-index: 1;
+    font-family: $font;
+
 } 
 
 #inputSearch:focus-visible {
@@ -36,7 +39,8 @@ body {
 
 
 #btnSearch {
-    background-color: #cfcfcf;
+
+    background-color: #6dc9b7;
     padding: 20px;
     border-radius: 40px;
     border-style: none;
@@ -45,8 +49,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 3px;
-    z-index: 2;
+    margin-right: 2px;
+    cursor: pointer;
+
 }
 
 .searchButton {
@@ -56,4 +61,24 @@ body {
 
 .searchButton:hover {
     opacity: 0.8;
+}
+
+@media screen and (max-width: 800px) {
+    .search-content {
+        font-family: $font;
+        width: 100%;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .searchBar {
+        input::placeholder {
+            opacity: 0;
+        }
+        width: 18rem;
+    }
 }

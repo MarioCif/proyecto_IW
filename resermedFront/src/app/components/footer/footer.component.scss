@@ -2,6 +2,8 @@ $font: 'Nunito',sans-serif;
 .pie-pagina{
     width: 100%;
     background-color: #002737;
+    position: relative;
+    bottom: 0px;
 }
 
 .pie-pagina .grupo-1{
@@ -52,19 +54,26 @@ $font: 'Nunito',sans-serif;
     display: inline-block;
 }
 
-.red{
-    text-decoration: none;
-    width: 35px;
-    height: 35px;
-    line-height: 45px;
-    margin-right: 10px;
-    fill: #fff;
-    text-align: center;
-    transition: all 300ms ease ;
+
+
+.red {
+    cursor: default;
+
+    i{
+        
+        text-decoration: none;
+        font-size: 30px;
+        margin-right: 12px;
+        color: #fff;
+        text-align: center;
+        transition: all 300ms ease-in-out ;
+        cursor: pointer;
+    }
+
 }
 
-.red:hover{
-    fill: #6dc9b7;
+.red i:hover{
+    color: #6dc9b7;
 }
 
 .pie-pagina .grupo-2{
