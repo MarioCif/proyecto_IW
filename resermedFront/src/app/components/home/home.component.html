@@ -8,11 +8,79 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
-    
+
         </form>
     </div>
+    <div class="espec">
+        <div class="list" [class.list-off]="toggle">
+            <ul>
+                <li><a href="#">Médico General</a></li>
+                <li><a href="#">Psicólogo</a></li>
+                <li><a href="#">Ginecólogo</a></li>
+                <li><a href="#">Pediatra</a></li>
+                <li><a href="#">Psiquiatra</a></li>
+                <li><a href="#">Dermatólogo</a></li>
+                <li><a href="#">Traumatólogo</a></li>
+                <li><a href="#">Neurólogo</a></li>
+                <li><a href="#">Oftalmólogo</a></li>
+                <li><a href="#">Urologo</a></li>
+                <li><a href="#">Nutricionista</a></li>
+                <li><a href="#">Veterinario</a></li>
+                <strong><li><a (click)="toggleList()">Ver Mas</a></li></strong>
+            </ul>
+        </div>
 
- 
-
-
+        <div class="fullList" [class.fullList-show]="toggle">
+            <div class="tittle">
+                <h3>Especialidades mas populares</h3>
+                <h3 class="todo"><a href="#">Mostrar Todas</a></h3>
+            </div>
+            <div class="cards">
+                <div class="card">
+                    <div>
+                        <h3><a href="#">Médico General</a></h3>
+                        <p>Lorem ipsum dolor sit amet consectetur
+                            adipisicing elit. A voluptatum,
+                            minima harum aperiam explicabo incidunt totam
+                            sapiente magni consectetur, temporibus exercitationem
+                            delectus ex, officia commodi alias quaerat eligendi!
+                            Qui, asperiores!</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3><a href="#">Psicólogo</a></h3>
+                        <p>Lorem ipsum dolor sit amet consectetur
+                            adipisicing elit. A voluptatum,
+                            minima harum aperiam explicabo incidunt totam
+                            sapiente magni consectetur, temporibus exercitationem
+                            delectus ex, officia commodi alias quaerat eligendi!
+                            Qui, asperiores!</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3><a href="#">Ginecólogo</a></h3>
+                        <p>Lorem ipsum dolor sit amet consectetur
+                            adipisicing elit. A voluptatum,
+                            minima harum aperiam explicabo incidunt totam
+                            sapiente magni consectetur, temporibus exercitationem
+                            delectus ex, officia commodi alias quaerat eligendi!
+                            Qui, asperiores!</p>
+                    </div>
+                </div>
+                <div class="card"[class.cardoff]="toggle">
+                    <div>
+                        <h3><a href="#">Pediatra</a></h3>
+                        <p>Lorem ipsum dolor sit amet consectetur
+                            adipisicing elit. A voluptatum,
+                            minima harum aperiam explicabo incidunt totam
+                            sapiente magni consectetur, temporibus exercitationem
+                            delectus ex, officia commodi alias quaerat eligendi!
+                            Qui, asperiores!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

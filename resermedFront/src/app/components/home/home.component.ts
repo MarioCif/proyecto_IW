@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  toggle:boolean = false;
 
+  constructor (){}
+
+  toggleList(){
+    if(!this.toggle){
+      this.toggle=true;
+    }else{
+      this.toggle=false;
+    }
+  }
 }
