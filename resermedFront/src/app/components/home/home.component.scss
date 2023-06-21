@@ -3,23 +3,25 @@ $font: 'Nunito', sans-serif;
 .wrapper {
     height: 100%;
     overflow: auto;
-    background-image: url(../../../assets/endless-constellation1.svg);
-    background-repeat: repeat;
+
 }
 
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    margin-top: 5vh;
+}
 
 .search-content {
     font-family: $font;
     width: 100%;
-    position: absolute;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -25%);
-    
+    text-align: center;
 }
 
 .searchBar {
@@ -72,6 +74,119 @@ $font: 'Nunito', sans-serif;
     opacity: 0.8;
 }
 
+.espec{
+    margin-top: 4%;
+    position: relative;
+}
+
+.list {
+    margin-right: 200px;
+    margin-left: 200px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    ul {
+        padding: 0;
+        text-align: center;
+
+        li {
+            display: inline-block;
+            padding: 1vh;
+            font-family: $font;
+            font-size: 15px;
+
+            a {
+                text-decoration: none;
+                color: black;
+                transition: all 300ms ease;
+            }
+
+            a:hover {
+                color: #6dc9b7;
+            }
+        }
+    }
+}
+
+.tittle{
+    margin-left: 150px;
+    margin-right: 150px;
+    display: flex;
+    justify-content: space-between;
+    h3{
+        display: inline-block;
+        font-family: $font;
+        font-size: 15px;
+        a{
+            text-decoration: none;
+            color: teal;
+        }
+
+        a:hover{
+            color: #6dc9b7;
+            text-decoration: underline;
+        }
+    }
+}
+
+
+.cards {
+    display: flex;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-bottom: 50px;
+}
+
+.card {
+    margin-right: 15px;
+    margin-left: 15px;
+    div {
+        h3 {
+            font-family: $font;
+            font-size: 15px;
+
+            a {
+                text-decoration: none;
+                color: black;
+                transition: all 300ms ease;
+            }
+
+            a:hover {
+                color: #6dc9b7;
+            }
+        }
+        p{
+            font-family: $font;
+            text-align: justify;
+            font-size: 15px;
+        }
+    }
+}
+
+.list-off {
+    display: none;
+}
+
+.fullList {
+    display: none;
+}
+
+.fullList-show {
+    display: inline;
+
+    ul {
+        padding: 0;
+        text-align: center;
+
+        li {
+            display: inline-block;
+            padding: 1vh;
+        }
+    }
+}
+
+
 @media screen and (max-width: 800px) {
 
     .searchBar {
@@ -82,7 +197,91 @@ $font: 'Nunito', sans-serif;
         width: 18rem;
     }
 
-    .wrapper {
-        height: 90vh;
+    .list {
+        margin-top: 30%;
+        margin-right: 15px;
+        margin-left: 15px;
+        background-color: #f7f7f7;
+        border-radius: 10px;
+        ul {
+            padding: 0;
+            text-align: center;
+    
+            li {
+                display: inline-block;
+                padding: 7px;
+                font-family: $font;
+                font-size: 15px;
+    
+                a {
+                    text-decoration: none;
+                    color: black;
+                    transition: all 300ms ease;
+                }
+    
+                a:hover {
+                    color: #6dc9b7;
+                }
+            }
+        }
+    }
+
+    .tittle{
+        margin-top: 30%;
+        margin-left: 5px;
+        margin-right: 5px;
+        display: flex;
+        justify-content: space-between;
+        
+        h3{
+            display: inline-block;
+            font-family: $font;
+            font-size: 15px;
+            a{
+                text-decoration: none;
+                color: black;
+            }
+            a:hover{
+                color: #6dc9b7;
+            }
+        }
+    }
+
+    .cards {
+        display: flex;
+        background-color: #f7f7f7;
+        border-radius: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    
+    .card {
+        margin-right: 15px;
+        margin-left: 15px;
+    
+        div {
+            h3 {
+                font-family: $font;
+                font-size: 15px;
+    
+                a {
+                    text-decoration: none;
+                    color: black;
+                    transition: all 300ms ease;
+                }
+    
+                a:hover {
+                    color: #6dc9b7;
+                }
+            }
+            p{
+                font-family: $font;
+                text-align: justify;
+                font-size: 15px;
+            }
+        }
+    }
+    .cardoff{
+        display: none;
     }
 }
