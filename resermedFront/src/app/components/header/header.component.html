@@ -15,7 +15,7 @@
     <div class="navbar-links"[class.navbar-links-show]="toggle">
         <ul>
             <li><a href="">Quiénes Somos</a></li>
-            <li><a href="">Iniciar Sesión</a></li>
+            <li><a [routerLink]="['/login']" routerLinkActive="router-link-active" >Iniciar Sesión</a></li>
             <li><a href="">Registrarse</a></li>
         </ul>
     </div>
