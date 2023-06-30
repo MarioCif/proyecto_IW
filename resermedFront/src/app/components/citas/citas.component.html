@@ -1,0 +1,51 @@
+<div class="container">
+    <h1>Mis Citas</h1>
+    <h2><strong>Proxima Cita</strong></h2>
+    <div class="card">
+        <div class="imagen">
+            <img src="../../../assets/img/p1.png">
+        </div>
+        <div class="datos">
+            <h3>Neurologo</h3>
+            <p>Fecha: 29/06/2023</p>
+            <p>Hora de Inicio: 10:30pm</p>
+            <button class="btn btn-primary" (click)="abrirModal()">Ver mas Detalles</button>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <th>Citas de la Semana</th>
+            <th></th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Dentista</td>
+                <td>Hora Inicio: 18:30pm</td>
+                <td>Hora Termino: 20:50pm</td>
+                <td class="btnesp"><button class="btn btn-primary">Ver mas Detalles</button></td>
+            </tr>
+            <tr>
+                <td>Urologo</td>
+                <td>Hora Inicio: 9:30am</td>
+                <td>Hora Termino: 11:00am</td>
+                <td class="btnesp"><button class="btn btn-primary">Ver mas Detalles</button></td>
+            </tr>
+            <tr>
+                <td>Veterinario</td>
+                <td>Hora Inicio: 15:30pm</td>
+                <td>Hora Termino: 17:50pm</td>
+                <td class="btnesp"><button class="btn btn-primary">Ver mas Detalles</button></td>
+            </tr>
+            <tr>
+                <td>Cardiologo</td>
+                <td>Hora Inicio: 12:30pm</td>
+                <td>Hora Termino: 14:20pm</td>
+                <td class="btnesp"><button class="btn btn-primary">Ver mas Detalles</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-modal-detalles></app-modal-detalles>

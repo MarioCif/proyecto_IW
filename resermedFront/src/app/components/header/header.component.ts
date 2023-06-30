@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   toggle:boolean = false;
+  session:boolean = true;
 
   constructor () {
 
@@ -17,6 +18,12 @@ export class HeaderComponent {
       this.toggle=true;
     }else{
       this.toggle=false;
+    }
+  }
+
+  cerrarSesion(){
+    if(this.session){
+      this.session=false;
     }
   }
 }

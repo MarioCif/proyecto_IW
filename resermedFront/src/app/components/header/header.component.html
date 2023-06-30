@@ -12,11 +12,19 @@
         </a>
     </div>
 
-    <div class="navbar-links"[class.navbar-links-show]="toggle">
+    <div class="navbar-links"[class.navbar-links-show]="toggle" *ngIf="!session">
         <ul>
             <li><a href="">Quiénes Somos</a></li>
             <li><a [routerLink]="['/login']" routerLinkActive="router-link-active" >Iniciar Sesión</a></li>
             <li><a href="">Registrarse</a></li>
+        </ul>
+    </div>
+
+    <div class="navbar-links"[class.navbar-links-show]="toggle" *ngIf="session">
+        <ul>
+            <li><a href="">Quiénes Somos</a></li>
+            <li><a [routerLink]="['/citas']" routerLinkActive="router-link-active" >Mis Citas</a></li>
+            <li><a (click)="cerrarSesion()">Cerrar Sesión</a></li>
         </ul>
     </div>
 </nav>
