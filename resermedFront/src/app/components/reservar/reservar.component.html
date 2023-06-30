@@ -1,0 +1,54 @@
+<section>
+    <div class="container">
+        <h1>Reservar con: </h1>
+        <div class="row">
+            <div class="col-sm" id="datos-reserva">
+                <div class="row">
+                    <div class="col-md">
+                        <img src="../../../assets/img/img-doctores/p1.png">
+                    </div>
+                    <div class="col-md-9" id="datos-profesional">
+                        <h5>Charles Freyer Hamilton</h5>
+                        <h6>Oftalmología</h6>
+                    </div>
+                </div>
+                <div class="datos">
+                    <form>
+                        <div class="form-group">
+                            <label for="motivo-cita">Motivo de consulta:</label>
+                            <textarea class="form-control" id="motivo-cita" rows="3"></textarea>
+                        </div>
+
+                    </form>
+
+                    <label for="precio"> Costo de consulta:</label>
+                    <p>$ {{ precio }}</p>
+                </div>
+            </div>
+            <div class="col-sm" id="disponibilidad">
+                <h5>Horarios disponibles</h5>
+                <label for="fecha-filtro">Filtrar por fecha:</label><input type="date" id="fecha-filtro">
+                <!-- <p>Disponibles por:</p> -->
+                
+                <div class="horas">
+                    <div *ngFor="let d of citasDisponibles" class="card col-sm-6">
+                        <div class="card-body">
+                            <div class="container-left">
+                                <h6>Fecha: {{ d.fecha }}</h6>
+                                <h6>Hora: {{ d.horaInicio }} - {{ d.horaTermino }}</h6>
+                            </div>
+                            <div class="container-right">
+                                <button type="button" class="btn btn-success">Reservar
+                                    <i class="fa-solid fa-circle-check"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
