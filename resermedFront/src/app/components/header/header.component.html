@@ -1,6 +1,6 @@
 <nav class="navbar">
     <div class="logo">
-        <a href="#">
+        <a [routerLink]="['/home']" routerLinkActive="router-link-active">
             <img src="../../assets/resermed__2_.png" alt="logo">
             <h1>ReserMed</h1>
         </a>
@@ -16,7 +16,7 @@
         <ul>
             <li><a href="">Quiénes Somos</a></li>
             <li><a [routerLink]="['/login']" routerLinkActive="router-link-active" >Iniciar Sesión</a></li>
-            <li><a href="">Registrarse</a></li>
+            <li><a [routerLink]="['/registro']" routerLinkActive="router-link-active">Registrarse</a></li>
         </ul>
     </div>
 
