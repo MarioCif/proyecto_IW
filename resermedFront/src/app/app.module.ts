@@ -11,6 +11,7 @@ import { ReservarComponent } from './components/reservar/reservar.component';
 import { CitasComponent } from './components/citas/citas.component';
 import { ModalDetallesComponent } from './components/citas/modal-detalles/modal-detalles.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { AdminModule } from './components/admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { RegistroComponent } from './components/registro/registro.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]
