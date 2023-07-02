@@ -12,6 +12,8 @@ import { CitasComponent } from './components/citas/citas.component';
 import { ModalDetallesComponent } from './components/citas/modal-detalles/modal-detalles.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { AdminModule } from './components/admin/admin.module';
+import { CalendarioComponent } from './components/calendario/calendario.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -23,12 +25,14 @@ import { AdminModule } from './components/admin/admin.module';
     ReservarComponent,
     CitasComponent,
     ModalDetallesComponent,
-    RegistroComponent
+    RegistroComponent,
+    CalendarioComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AdminModule
+    AdminModule,
+    FullCalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

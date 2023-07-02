@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ReservarComponent } from './components/reservar/reservar.component';
 import { CitasComponent } from './components/citas/citas.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { CalendarioComponent } from './components/calendario/calendario.component';
 import { AdminComponent } from './components/admin/components/admin/admin.component';
 import { MedicosComponent } from './components/admin/components/medicos/medicos.component';
 import { PacientesComponent } from './components/admin/components/pacientes/pacientes.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'reservar', component: ReservarComponent },
   { path: 'citas', component: CitasComponent},
   { path: 'registro', component: RegistroComponent},
+  { path: 'calendario', component: CalendarioComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
