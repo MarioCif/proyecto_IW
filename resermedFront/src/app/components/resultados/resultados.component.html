@@ -1,0 +1,31 @@
+<div class="wrapper">
+    <div class="search-content">
+        <form action="" class="searchBar">
+            <input #box type="search" id="inputSearch" class="form-control" placeholder="Buscar profesional" value="{{message}}" />
+            <div class="searchButton">
+                <button type="button" class="" id="btnSearch" (click)="onClick(box.value)">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+    <h1 class="resultado">Resultados</h1>
+    <div class="cards" *ngFor="let medi of medicos">
+        <div class="card" *ngIf="medi.Especialidad == box.value">
+            <div class="img">
+                <img src="{{medi.Foto}}">
+            </div>
+            <div>
+                <h3>{{medi.Nombre}}</h3>
+                <h3>{{medi.Ubicacion}}</h3>
+                <h3>{{medi.Especialidad}}</h3>
+                <h3>Costo: ${{medi.Costo}}</h3>
+                <div class="btn">
+                    <button class="btn btn-primary" [routerLink]="['/reservar']" routerLinkActive="router-link-active">Reservar Hora</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  -->

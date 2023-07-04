@@ -14,6 +14,7 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { AdminModule } from './components/admin/admin.module';
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { ResultadosComponent } from './components/resultados/resultados.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     CitasComponent,
     ModalDetallesComponent,
     RegistroComponent,
-    CalendarioComponent
+    CalendarioComponent,
+    ResultadosComponent
   ],
   imports: [
     BrowserModule,

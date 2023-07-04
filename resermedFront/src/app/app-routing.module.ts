@@ -10,11 +10,13 @@ import { CalendarioComponent } from './components/calendario/calendario.componen
 import { AdminComponent } from './components/admin/components/admin/admin.component';
 import { MedicosComponent } from './components/admin/components/medicos/medicos.component';
 import { PacientesComponent } from './components/admin/components/pacientes/pacientes.component';
+import { ResultadosComponent } from './components/resultados/resultados.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
+  { path: 'resultados', component: ResultadosComponent},
   { path:'login',component: LoginComponent},
-  {path:'admin',component:AdminComponent, children:[
+  { path:'admin',component:AdminComponent, children:[
     {path:'medicos',component: MedicosComponent},
     {path: 'pacientes', component: PacientesComponent}
   ]},

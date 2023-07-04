@@ -4,9 +4,9 @@
     <div class="search-content">
         <h1>Encuentra una cita con tu especialista</h1>
         <form action="" class="searchBar">
-            <input type="search" id="inputSearch" class="form-control" placeholder="Buscar profesional" />
+            <input #box type="search" id="inputSearch" class="form-control" placeholder="Buscar profesional" (keydown.enter)="onEnter(box.value)"/>
             <div class="searchButton">
-                <button type="button" class="" id="btnSearch">
+                <button type="button" class="" id="btnSearch" (click)="onClick(box.value)" [routerLink]="['/resultados']" routerLinkActive="router-link-active" >
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
