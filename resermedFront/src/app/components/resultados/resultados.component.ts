@@ -74,4 +74,22 @@ export class ResultadosComponent implements OnInit, OnDestroy{
       this.vacio = false;
     }
   }
+
+  onEnter(message:string){
+    this.message = message;
+    this.data.updateAmessage(this.message);
+    if(this.message == ""){
+      this.vacio = true;
+    }else{
+      this.vacio = false;
+    }
+  }
+
+  compare(val1:string, val2:string): boolean {
+    if(val1.includes(val2) && val2 != ""){
+      return true;
+    }else{
+      return false;
+    }
+  }
 }
