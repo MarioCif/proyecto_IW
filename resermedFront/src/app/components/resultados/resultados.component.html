@@ -12,8 +12,8 @@
     <h1 class="resultado">Resultados</h1>
     <div class="cards">
         <div *ngFor="let medi of medicos">
-            <div class="card"  *ngIf="medi.Especialidad === box.value 
-            || medi.Ubicacion === box.value || compare(medi.Nombre, box.value)">
+            <div class="card"  *ngIf="compare(medi.Especialidad, box.value)
+            || compare(medi.Ubicacion, box.value) || compare(medi.Nombre, box.value)">
                 <div class="img">
                     <img src="{{medi.Foto}}">
                 </div>
