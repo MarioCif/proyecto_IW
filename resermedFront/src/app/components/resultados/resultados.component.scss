@@ -104,7 +104,8 @@ $font: 'Nunito', sans-serif;
             display: block;
             margin: auto;
             border-radius: 50%;
-            width: 60%;
+            max-width: 60%;
+            height: 60%;    
         }
     }
     div {
@@ -126,4 +127,11 @@ $font: 'Nunito', sans-serif;
             }
         }
     }
+}
+
+.sinData{
+    text-align: center;
+    font-family: $font;
+    font-size: 2rem;
+    margin: 0;
 }

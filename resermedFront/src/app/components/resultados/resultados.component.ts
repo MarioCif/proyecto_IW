@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { medicos } from 'src/app/interfaces/interfaces';
@@ -17,7 +17,7 @@ export class ResultadosComponent implements OnInit, OnDestroy{
       "Ubicacion": 'Chillan',
       "Especialidad": 'Oftalmologo',
       "Valoracion": 5,
-      "Foto": "../../../assets/img/p1.png",
+      "Foto": "../../../assets/img/img-doctores/p1.png",
       "Costo": 20000  
     },
     {
@@ -25,7 +25,7 @@ export class ResultadosComponent implements OnInit, OnDestroy{
       "Ubicacion": 'Chillan Viejo',
       "Especialidad": 'Urologo',
       "Valoracion": 3,
-      "Foto": "",
+      "Foto": "../../../assets/img/img-doctores/p11.png",
       "Costo": 23000
     },
     {
@@ -33,27 +33,34 @@ export class ResultadosComponent implements OnInit, OnDestroy{
       "Ubicacion": 'Lota',
       "Especialidad": 'Neurologa',
       "Valoracion": 4,
-      "Foto": "",
+      "Foto": "../../../assets/img/img-doctores/p4.png",
       "Costo": 35000
     },
     { 
-      "Nombre": 'Miguel Poblete ',
+      "Nombre": 'Miguel Poblete Quintana',
       "Ubicacion": 'Atacama',
       "Especialidad": 'Dentista',
       "Valoracion": 5,
-      "Foto": "",
-      "Costo": 450000
+      "Foto": "../../../assets/img/img-doctores/p7.jpg",
+      "Costo": 45000
     }
   ];
 
   message!:string;
   subs!:Subscription;
+  vacio:boolean = false;
 
-  constructor(private data: RegistroService, private router: Router){}
+  constructor(private data: RegistroService){}
 
   ngOnInit(): void {
     this.subs = this.data.current.subscribe(message => this.message = message)
+    if(this.message == ""){
+      this.vacio = true;
+    }else{
+      this.vacio = false;
+    }
   }
+
   ngOnDestroy(): void {
       this.subs.unsubscribe();
   }
@@ -61,5 +68,10 @@ export class ResultadosComponent implements OnInit, OnDestroy{
   onClick(message:string){
     this.message = message;
     this.data.updateAmessage(this.message);
+    if(this.message == ""){
+      this.vacio = true;
+    }else{
+      this.vacio = false;
+    }
   }
 }

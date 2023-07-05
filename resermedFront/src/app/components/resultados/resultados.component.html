@@ -1,19 +1,19 @@
 <div class="wrapper">
     <div class="search-content">
-        <form action="" class="searchBar">
+        <div action="" class="searchBar">
             <input #box type="search" id="inputSearch" class="form-control" placeholder="Buscar profesional" value="{{message}}" />
             <div class="searchButton">
                 <button type="button" class="" id="btnSearch" (click)="onClick(box.value)">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
-        </form>
+        </div>
     </div>
     <h1 class="resultado">Resultados</h1>
     <div class="cards">
         <div *ngFor="let medi of medicos">
             <div class="card"  *ngIf="medi.Especialidad == box.value 
-                || medi.Ubicacion == box.value">
+            || medi.Ubicacion === box.value">
                 <div class="img">
                     <img src="{{medi.Foto}}">
                 </div>
@@ -28,6 +28,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="sinData" *ngIf="vacio">
+        <h1>Ingrese datos de busqueda correcta :(</h1>
     </div>
 </div>
 
