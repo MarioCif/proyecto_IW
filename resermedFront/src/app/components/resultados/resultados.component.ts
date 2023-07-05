@@ -38,8 +38,8 @@ export class ResultadosComponent implements OnInit, OnDestroy{
     },
     { 
       "Nombre": 'Miguel Poblete ',
-      "Ubicacion": 'Ciudad Sexo',
-      "Especialidad": 'Sexologo',
+      "Ubicacion": 'Atacama',
+      "Especialidad": 'Dentista',
       "Valoracion": 5,
       "Foto": "",
       "Costo": 450000
