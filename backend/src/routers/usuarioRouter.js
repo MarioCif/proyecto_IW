@@ -4,11 +4,13 @@ import {
     getUsuarioById,
     createUsuario,
     updateUsuario,
-    deleteUsuario
+    deleteUsuario,
+    loginUsuario
 } from "../controllers/usuarioController.js";
 
 const router = Router();
 
+router.post('/login',loginUsuario);
 router.get('/usuarios', getUsuarios);
 router.get('/usuarios/:id', getUsuarioById);
 router.post('/usuarios', createUsuario);

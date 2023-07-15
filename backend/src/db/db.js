@@ -5,6 +5,6 @@ var db = {
     dialect: 'postgres',
     logging: false
 };
-var dbPass = 'pass123';
+var dbPass = 'admin1';
 
 export const sequelize = new Sequelize('resermed', 'postgres', dbPass, db);

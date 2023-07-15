@@ -1,3 +1,5 @@
+
+import {  encryptP } from "../helpers/handleBcrypt.js";
 import { Usuario } from "../models/Usuario.js";
 
 export const getUsuarios = async (req, res) => {
@@ -19,21 +21,25 @@ export const getUsuarioById = async (req, res) => {
 };
 
 export const createUsuario = async (req, res) => {
+    //el usuario no se creara a menos que tenga un rut, email diferente
+    
     try {
+        const {rut,nombre,apellido,email,password,rol} = req.body;
+        const passwordHash = await encryptP(password)
         
-        const { nombre, apellido, rut, email, password, rol } = req.body;
-
-        await Usuario.create({
+        const newU = await Usuario.create({
             rut,
             nombre,
             apellido,
             email,
-            password,
-            rol,
+            password: passwordHash,
+            rol
         });
-
+        
+        console.log(newU)
         return res.sendStatus(200);
     } catch (error) {
+        console.log(error)
         return res.status(500).json({ message: "Error interno del servidor" });
     }
 }
@@ -93,4 +99,11 @@ export const updateUsuario = async (req, res) => {
     } catch (error) {
         return res.status(500).json({ message: "Error interno del servidor" });
     }
+}
+
+export const loginUsuario = async (req, res)=>{
+
+    const {email,password} = req.body;
+
+
 }

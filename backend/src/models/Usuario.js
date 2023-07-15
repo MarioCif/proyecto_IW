@@ -1,7 +1,8 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db/db.js";
+import { Cita } from "./Citas.js";
 
-export const Usuario = sequelize.define("Usuario", {
+export const Usuario = sequelize.define('Usuarios', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -30,4 +31,16 @@ export const Usuario = sequelize.define("Usuario", {
     rol: {
         type: DataTypes.INTEGER,
     },
+},
+    {timestamps: false}
+);
+//un usuario puede tener muchas citas
+Usuario.hasMany(Cita,{
+    foreingKey: 'us_id',
+    sourceKey: 'id'
+})
+//muchas citas pertenecen a un usuario
+Cita.belongsTo(Usuario,{
+    foreingKey: 'us_id',
+    targetId: 'id'
 })
