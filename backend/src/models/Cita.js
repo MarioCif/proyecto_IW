@@ -9,7 +9,13 @@ export const Cita = sequelize.define('Cita', {
         autoIncrement: true
     },
     fecha: {
-        type: DataTypes.DATE
+        type: DataTypes.DATEONLY
+    },
+    hora_inicio: {
+        type: DataTypes.TIME,
+    },
+    hora_termino: {
+        type: DataTypes.TIME,
     },
     observacion: {
         type: DataTypes.STRING(255)
