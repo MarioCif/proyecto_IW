@@ -1,5 +1,5 @@
 
-import {  compareP, encryptP } from "../helpers/handleBcrypt.js";
+import { compareP, encryptP } from "../helpers/handleBcrypt.js";
 import { Usuario } from "../models/Usuario.js";
 
 export const getUsuarios = async (req, res) => {
@@ -22,20 +22,22 @@ export const getUsuarioById = async (req, res) => {
 
 export const createUsuario = async (req, res) => {
     //el usuario no se creara a menos que tenga un rut, email diferente
-    
+
     try {
-        const {rut,nombre,apellido,email,password,rol} = req.body;
+        const { rut, nombre, apellido, email, password, img_url} = req.body;
         const passwordHash = await encryptP(password)
-        
+
         const newU = await Usuario.create({
             rut,
             nombre,
             apellido,
             email,
             password: passwordHash,
+            img_url,
             rol
         });
-        
+
+
         console.log(newU)
         return res.sendStatus(200);
     } catch (error) {
@@ -71,7 +73,7 @@ export const deleteUsuario = async (req, res) => {
 export const updateUsuario = async (req, res) => {
     try {
         const { id } = req.params;
-        const { nombre, apellido, rut, email, password, rol } = req.body;
+        const { nombre, apellido, rut, email, password, img_url} = req.body;
 
         const usuarioExistente = await Usuario.findOne({
             where: {
@@ -88,7 +90,7 @@ export const updateUsuario = async (req, res) => {
             rut,
             email,
             password,
-            rol,
+            img_url,
         }, {
             where: {
                 id,
@@ -101,27 +103,27 @@ export const updateUsuario = async (req, res) => {
     }
 }
 
-export const loginUsuario = async (req, res)=>{
+export const loginUsuario = async (req, res) => {
 
-    const {email,password} = req.body;
+    const { email, password } = req.body;
     const user = await Usuario.findOne({
-        where: {email}
+        where: { email }
     })
     console.log(user)
-    if(!user){
+    if (!user) {
         res.status(404);
-        res.send({error: 'Usuario no registrado'});
+        res.send({ error: 'Usuario no registrado' });
         return
     }
-    
-    const checkPassword = await compareP(password,user.password);
 
-    if(checkPassword){
+    const checkPassword = await compareP(password, user.password);
+
+    if (checkPassword) {
         res.send({
             data: user
         });
         return
-    }else{
+    } else {
         res.status(404);
         res.send({
             error: 'Credenciales incorrectas'

@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "../db/db.js";
 import { Cita } from "./Cita.js";
 
-export const Usuario = sequelize.define('Usuario', {
+export const Medico = sequelize.define('Medico', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -25,19 +25,22 @@ export const Usuario = sequelize.define('Usuario', {
     password: {
         type: DataTypes.STRING(255),
     },
+    especialidad: {
+        type: DataTypes.STRING,
+    },
     img_url: {
         type: DataTypes.STRING,
     },
 },
     { timestamps: false }
 );
-//un usuario puede tener muchas citas
-Usuario.hasMany(Cita, {
-    foreingKey: 'id_usuario',
+//un medico puede tener muchas citas
+Medico.hasMany(Cita, {
+    foreingKey: 'id_medico',
     sourceKey: 'id'
 })
-//muchas citas pertenecen a un usuario
-Cita.belongsTo(Usuario, {
-    foreingKey: 'id_usuario',
+//muchas citas pertenecen a un medico
+Cita.belongsTo(Medico, {
+    foreingKey: 'id_medico',
     targetId: 'id'
 })

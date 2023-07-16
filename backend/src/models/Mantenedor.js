@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db/db.js";
-import { Cita } from "./Cita.js";
+import { Medico } from "./Medico.js";
 
-export const Usuario = sequelize.define('Usuario', {
+export const Mantenedor = sequelize.define('Mantenedor', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -31,13 +31,13 @@ export const Usuario = sequelize.define('Usuario', {
 },
     { timestamps: false }
 );
-//un usuario puede tener muchas citas
-Usuario.hasMany(Cita, {
-    foreingKey: 'id_usuario',
+//un mantenedor puede tener muchos medicos
+Mantenedor.hasMany(Medico, {
+    foreingKey: 'id_mantenedor',
     sourceKey: 'id'
 })
-//muchas citas pertenecen a un usuario
-Cita.belongsTo(Usuario, {
-    foreingKey: 'id_usuario',
+//muchas medicos pertenecen a un medico
+Medico.belongsTo(Mantenedor, {
+    foreingKey: 'id_mantenedor',
     targetId: 'id'
 })
