@@ -11,6 +11,7 @@ import { AdminComponent } from './components/admin/components/admin/admin.compon
 import { MedicosComponent } from './components/admin/components/medicos/medicos.component';
 import { PacientesComponent } from './components/admin/components/pacientes/pacientes.component';
 import { ResultadosComponent } from './components/resultados/resultados.component';
+import { SetHorarioComponent } from './components/set-horario/set-horario.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'citas', component: CitasComponent},
   { path: 'registro', component: RegistroComponent},
   { path: 'calendario', component: CalendarioComponent},
+  { path: 'nuevo-horario', component: SetHorarioComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 

@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="content d-flex">
+        <h2>Definir horario</h2>
+
+        <div class="jornada d-flex">
+            <label>Inicio de jornada:</label>
+            <input type="time" id="jornada-inicio">
+            <label for="" id="jornada-termino-label">Término de jornada:</label>
+            <input type="time">
+        </div>
+        <div class="set-horario">
+            <h3 class="text-center">Selecciona el método para agregar citas</h3>
+            <div class="metodos-cita d-flex">
+                <div class="individual col-sm-6 d-flex">
+                    <h4>Cita individual</h4>
+                    <p>Agrega una cita para la fecha indicada con hora de inicio y término que desees.</p>
+
+                    <div class="indiv-fecha">
+                        <label for="">Fecha:</label>
+                        <input type="date">
+                    </div>
+                    <div class="indiv-inicio">
+                        <label for="">Hora de inicio:</label>
+                        <input type="time">
+                    </div>
+                    <div class="indiv-termino">
+                        <label for="">Hora de término:</label>
+                        <input type="time">
+                    </div>
+                    <button type="button" class="btn btn-success">Agregar
+                        <i class="fa-regular fa-calendar-plus"></i>
+                    </button>
+                </div>
+                <div class="semana-automatico col-sm-6 d-flex">
+                    <h4>Citas por semana</h4>
+                    <p>Agrega citas para la semana actual de manera automática, selecciona la duración que tendrá cada
+                        cita y el tiempo que habrá entre cada una, así como un horario protegido para el cual no se
+                        crearán citas.</p>
+                    <div class="auto-duracion">
+                        <label for="">Duración de cita:</label>
+                        <select name="" id="">
+                            <option value="">20 minutos</option>
+                            <option value="">30 minutos</option>
+                            <option value="">40 minutos</option>
+                            <option value="">50 minutos</option>
+                            <option value="">60 minutos</option>
+                        </select>
+                    </div>
+                    <div class="auto-tiempo-entre">
+                        <label for="">Tiempo entre citas:</label>
+                        <select name="" id="">
+                            <option value="">Inmediato</option>
+                            <option value="">10 minutos</option>
+                            <option value="">20 minutos</option>
+                            <option value="">30 minutos</option>
+                            <option value="">40 minutos</option>
+                            <option value="">50 minutos</option>
+                            <option value="">60 minutos</option>
+                        </select>
+                    </div>
+                    <div class="auto-protegido">
+                        <h6 class="text-center">Horario protegido</h6>
+                        <div class="protegido-input d-flex">
+                            <input type="time">
+                            <p class="text-center">hasta</p>
+                            <input type="time">
+                        </div>
+
+                    </div>
+                    
+                    <button type="button" class="btn btn-success">Agregar
+                        <i class="fa-regular fa-calendar-plus"></i>
+                    </button>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

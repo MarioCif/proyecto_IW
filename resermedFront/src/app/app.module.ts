@@ -15,6 +15,7 @@ import { AdminModule } from './components/admin/admin.module';
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ResultadosComponent } from './components/resultados/resultados.component';
+import { SetHorarioComponent } from './components/set-horario/set-horario.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ResultadosComponent } from './components/resultados/resultados.componen
     ModalDetallesComponent,
     RegistroComponent,
     CalendarioComponent,
-    ResultadosComponent
+    ResultadosComponent,
+    SetHorarioComponent
   ],
   imports: [
     BrowserModule,
