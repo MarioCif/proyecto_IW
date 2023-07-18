@@ -5,12 +5,10 @@ import {
     createMantenedor,
     updateMantenedor,
     deleteMantenedor,
-    loginMantenedor
 } from "../controllers/mantenedorController.js";
 
 const router = Router();
 
-router.post('/mantenedores/login',loginMantenedor);
 router.get('/mantenedores', getMantenedores);
 router.get('/mantenedores/:id', getMantenedorById);
 router.post('/mantenedores', createMantenedor);

@@ -4,6 +4,7 @@ import usuarioRouter from './routers/usuarioRouter.js';
 import medicoRouter from './routers/medicoRouter.js';
 import mantenedorRouter from './routers/mantenedorRouter.js';
 import citaRouter from './routers/citaRouter.js';
+import authRouter from './routers/authRouter.js';
 const whiteList=['http://localhost:4200','...'];
 const app = express();
 
@@ -22,5 +23,6 @@ app.use(usuarioRouter);
 app.use(medicoRouter);
 app.use(mantenedorRouter);
 app.use(citaRouter);
+app.use(authRouter);
 
 export default app;

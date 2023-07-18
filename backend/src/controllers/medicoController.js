@@ -106,33 +106,5 @@ export const updateMedico = async (req, res) => {
     }
 }
 
-export const loginMedico = async (req, res) => {
-
-    const { email, password } = req.body;
-    const medico = await Medico.findOne({
-        where: { email }
-    })
-    console.log(medico)
-    if (!medico) {
-        res.status(404);
-        res.send({ error: 'Medico no registrado' });
-        return
-    }
-
-    const checkPassword = await compareP(password, medico.password);
-
-    if (checkPassword) {
-        res.send({
-            data: medico
-        });
-        return
-    } else {
-        res.status(404);
-        res.send({
-            error: 'Credenciales incorrectas'
-        })
-        return
-    }
-}
 
 

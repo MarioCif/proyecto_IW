@@ -33,8 +33,7 @@ export const createUsuario = async (req, res) => {
             apellido,
             email,
             password: passwordHash,
-            img_url,
-            rol
+            img_url
         });
 
 
@@ -103,33 +102,6 @@ export const updateUsuario = async (req, res) => {
     }
 }
 
-export const loginUsuario = async (req, res) => {
 
-    const { email, password } = req.body;
-    const user = await Usuario.findOne({
-        where: { email }
-    })
-    console.log(user)
-    if (!user) {
-        res.status(404);
-        res.send({ error: 'Usuario no registrado' });
-        return
-    }
-
-    const checkPassword = await compareP(password, user.password);
-
-    if (checkPassword) {
-        res.send({
-            data: user
-        });
-        return
-    } else {
-        res.status(404);
-        res.send({
-            error: 'Credenciales incorrectas'
-        })
-        return
-    }
-}
 
 

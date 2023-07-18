@@ -5,12 +5,10 @@ import {
     createMedico,
     updateMedico,
     deleteMedico,
-    loginMedico
 } from "../controllers/medicoController.js";
 
 const router = Router();
 
-router.post('/medicos/login',loginMedico);
 router.get('/medicos', getMedicos);
 router.get('/medicos/:id', getMedicoById);
 router.post('/medicos', createMedico);

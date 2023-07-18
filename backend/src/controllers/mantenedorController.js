@@ -104,33 +104,6 @@ export const updateMantenedor = async (req, res) => {
     }
 }
 
-export const loginMantenedor = async (req, res) => {
 
-    const { email, password } = req.body;
-    const mantenedor = await Mantenedor.findOne({
-        where: { email }
-    })
-    console.log(mantenedor)
-    if (!mantenedor) {
-        res.status(404);
-        res.send({ error: 'Mantenedor no registrado' });
-        return
-    }
-
-    const checkPassword = await compareP(password, mantenedor.password);
-
-    if (checkPassword) {
-        res.send({
-            data: mantenedor
-        });
-        return
-    } else {
-        res.status(404);
-        res.send({
-            error: 'Credenciales incorrectas'
-        })
-        return
-    }
-}
 
 
