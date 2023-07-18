@@ -24,6 +24,7 @@ export class HeaderComponent {
   cerrarSesion(){
     if(this.session){
       this.session=false;
+      localStorage.removeItem('sessionToken');
     }
   }
 }
