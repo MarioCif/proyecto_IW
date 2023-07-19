@@ -7,10 +7,14 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   toggle:boolean = false;
-
+  sessionToken:any;
 
   constructor () {
-
+    if(localStorage.getItem('sessionToken')){
+      this.sessionToken = localStorage.getItem('sessionToken');
+    }else{
+      this.sessionToken = '';
+    }
   }
 
   toggleMenu() {
@@ -21,12 +25,9 @@ export class HeaderComponent {
     }
   }
 
-  getSessionToken(){
-    return localStorage.getItem('sessionToken');
-  }
 
   cerrarSesion(){
-    localStorage.removeItem('sessionToken');
+    localStorage.setItem('sessionToken', '');
 
   }
 }
