@@ -12,3 +12,11 @@ export interface medicos{
     Foto:string;
     Costo:number;
 }
+export interface usuario{
+    nombre:string,
+    apellido:string,
+    rut:string,
+    email:string,
+    password:string,
+    img_url:string
+}

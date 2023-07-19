@@ -31,7 +31,7 @@
 
         <div class="navbar-links"[class.navbar-links-show]="toggle" *ngSwitchCase="'mantenedor'">
             <ul>
-                <li><a [routerLink]="['/']" routerLinkActive="router-link-active" >Panel de mantenedor</a></li>
+                <li><a [routerLink]="['/admin']" routerLinkActive="router-link-active" >Panel de mantenedor</a></li>
                 <li><a (click)="cerrarSesion()">Cerrar Sesión</a></li>
             </ul>
         </div>
