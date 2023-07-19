@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   toggle:boolean = false;
-  session:boolean = true;
+
 
   constructor () {
 
@@ -21,10 +21,12 @@ export class HeaderComponent {
     }
   }
 
+  getSessionToken(){
+    return localStorage.getItem('sessionToken');
+  }
+
   cerrarSesion(){
-    if(this.session){
-      this.session=false;
-      localStorage.removeItem('sessionToken');
-    }
+    localStorage.removeItem('sessionToken');
+
   }
 }
