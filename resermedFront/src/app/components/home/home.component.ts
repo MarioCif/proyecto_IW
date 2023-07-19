@@ -8,37 +8,37 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy{
-  toggle:boolean = false;
-  message!:string;
-  sub!:Subscription;
+export class HomeComponent implements OnInit, OnDestroy {
+  toggle: boolean = false;
+  message!: string;
+  sub!: Subscription;
 
-  constructor (private data: RegistroService, private router: Router){}
+  constructor(private data: RegistroService, private router: Router) { }
 
   ngOnInit(): void {
-      this.sub = this.data.current.subscribe(message => this.message = message);
+    this.sub = this.data.current.subscribe(message => this.message = message);
   }
 
-  onEnter(message:string){
+  onEnter(message: string) {
     this.message = message;
     this.data.updateAmessage(this.message);
     this.router.navigateByUrl('/resultados');
   }
 
-  onClick(message:string){
+  onClick(message: string) {
     this.message = message;
     this.data.updateAmessage(this.message);
   }
 
   ngOnDestroy(): void {
-      this.sub.unsubscribe();
+    this.sub.unsubscribe();
   }
 
-  toggleList(){
-    if(!this.toggle){
-      this.toggle=true;
-    }else{
-      this.toggle=false;
+  toggleList() {
+    if (!this.toggle) {
+      this.toggle = true;
+    } else {
+      this.toggle = false;
     }
   }
 }

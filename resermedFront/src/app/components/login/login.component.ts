@@ -37,6 +37,8 @@ export class LoginComponent implements OnInit{
           let rolUser = res.sessionToken;
           localStorage.setItem('sessionToken', rolUser);
           this.router.navigate(['/home']);
+          
+
         },
         error: (err) => {
           console.log('Error al iniciar sesión:', err);

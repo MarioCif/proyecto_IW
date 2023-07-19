@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environments';
 
 const base_url = environment.url_api;
@@ -15,7 +15,7 @@ export class LoginService {
   private readonly api_url = `${base_url}/login`;
 
   login(cuenta = {}): Observable<any>{
-    return this.http.post<any>(`${this.api_url}`, cuenta);
+    return this.http.post<any>(`${this.api_url}`, cuenta)
   }
 
 
