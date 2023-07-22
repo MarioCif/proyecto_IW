@@ -2,7 +2,7 @@
     <div class="container">
 
         <h2>Registrar usuario</h2>
-        <form class="col-md-6" [formGroup]="formulario" (ngSubmit)="registroUser()" >
+        <form class="col-md-6" [formGroup]="addUser" (ngSubmit)="registroUser()" >
             <div class="form-group">
                 <label for="nombre">Nombre</label>
                 <input type="text" formControlName="nombre" class="form-control" id="nombre" placeholder="Ingrese su nombre">
@@ -17,7 +17,7 @@
             </div>
             <div class="form-group">
                 <label for="telefono">Teléfono</label>
-                <input type="text"  class="form-control" id="telefono" placeholder="Ingrese su número de teléfono">
+                <input type="text" formControlName="telefono"  class="form-control" id="telefono" placeholder="Ingrese su número de teléfono">
             </div>
 
             <div class="form-group">
@@ -32,21 +32,25 @@
 
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Seleccione el tipo de usuario</label>
-                <select class="form-control" (change)="onChangeUserType($event)" id="exampleFormControlSelect1">
+                <select class="form-control" formControlName="tipo" (change)="onChangeUserType($event)" id="exampleFormControlSelect1">
 
                     <option>Paciente</option>
                     <option>Profesional</option>
-                    <option>Mantenendor</option>
+                    <option>Mantenedor</option>
 
                 </select>
             </div>
 
             <div class="form-group" *ngIf="esMedico">
                 <label for="especialidad">Especialidad</label>
-                <input type="text" class="form-control" id="especialidad" placeholder="Ingrese su especialidad">
+                <input type="text" formControlName="especialidad" class="form-control" id="especialidad" placeholder="Ingrese su especialidad">
             </div>
+            <button class="btn btn-outline-primary file " type="button" (click)="openWidget()" >
+                Agregar imagen
+                <i class="fa-regular fa-image"></i>
+            </button>
             <div class="botones">
-                <button [disabled]="formulario.invalid" type="submit" class="btn btn-primary col-sm-4">Registrar</button>
+                <button [disabled]="addUser.invalid" type="submit" class="btn btn-primary col-sm-4">Registrar</button>
                 <button type="button" [routerLink]="['/login']" class="btn btn-secondary col-sm-4">Cancelar</button>
             </div>
 

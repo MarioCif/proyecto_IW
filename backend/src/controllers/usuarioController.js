@@ -24,7 +24,7 @@ export const createUsuario = async (req, res) => {
     //el usuario no se creara a menos que tenga un rut, email diferente
 
     try {
-        const { rut, nombre, apellido, email, password, img_url} = req.body;
+        const { rut, nombre, apellido, email, password, img_url, telefono} = req.body;
         const passwordHash = await encryptP(password)
 
         const newU = await Usuario.create({
@@ -33,12 +33,13 @@ export const createUsuario = async (req, res) => {
             apellido,
             email,
             password: passwordHash,
-            img_url
+            img_url,
+            telefono
         });
 
 
         console.log(newU)
-        return res.sendStatus(200);
+        return res.status(201).json({ message: 'OK'});
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: "Error interno del servidor" });
@@ -63,7 +64,7 @@ export const deleteUsuario = async (req, res) => {
             },
         });
 
-        return res.sendStatus(200);
+        return res.status(200).json({ message: 'OK'});
     } catch (error) {
         return res.status(500).json({ message: "Error interno del servidor" });
     }
@@ -72,7 +73,7 @@ export const deleteUsuario = async (req, res) => {
 export const updateUsuario = async (req, res) => {
     try {
         const { id } = req.params;
-        const { nombre, apellido, rut, email, password, img_url} = req.body;
+        const { nombre, apellido, rut, email, password, img_url, telefono} = req.body;
 
         const usuarioExistente = await Usuario.findOne({
             where: {
@@ -90,13 +91,14 @@ export const updateUsuario = async (req, res) => {
             email,
             password,
             img_url,
+            telefono,
         }, {
             where: {
                 id,
             },
         });
 
-        return res.sendStatus(200);
+        return res.status(200).json({ message: 'OK'});
     } catch (error) {
         return res.status(500).json({ message: "Error interno del servidor" });
     }

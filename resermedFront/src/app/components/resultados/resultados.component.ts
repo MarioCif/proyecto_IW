@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { medicos } from 'src/app/interfaces/interfaces';
+import { IMedico } from 'src/app/interfaces/interfaces';
 import { RegistroService } from 'src/app/services/registro.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { RegistroService } from 'src/app/services/registro.service';
 })
 export class ResultadosComponent implements OnInit, OnDestroy{
 
-  medicos: medicos [] = [
+  medicos: IMedico [] = [/*
     {
       "Nombre": 'Charles Frayer Hamilton',
       "Ubicacion": 'Chillan',
@@ -43,7 +43,7 @@ export class ResultadosComponent implements OnInit, OnDestroy{
       "Valoracion": 5,
       "Foto": "../../../assets/img/img-doctores/p7.jpg",
       "Costo": 45000
-    }
+    }*/
   ];
 
   message!:string;

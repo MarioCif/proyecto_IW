@@ -12,24 +12,24 @@
     <h1 class="resultado">Resultados</h1>
     <div class="cards">
         <div *ngFor="let medi of medicos">
-            <div class="card"  *ngIf="compare(medi.Especialidad, box.value)
-            || compare(medi.Ubicacion, box.value) || compare(medi.Nombre, box.value)">
+            <!-- <div class="card"  *ngIf="compare(medi.especialidad, box.value)
+            || compare(medi.Ubicacion, box.value) || compare(medi.nombre, box.value)"> -->
                 <div class="img">
-                    <img src="{{medi.Foto}}">
+                    <!-- <img src="{{medi.Foto}}"> -->
                 </div>
                 <div>
-                    <h3>{{medi.Nombre}}</h3>
-                    <h3>{{medi.Ubicacion}}</h3>
-                    <h3>{{medi.Especialidad}}</h3>
-                    <h3>Costo: ${{medi.Costo}}</h3>
+                    <h3>{{medi.nombre}}</h3>
+                    <!-- <h3>{{medi.Ubicacion}}</h3> -->
+                    <h3>{{medi.especialidad}}</h3>
+                    <!-- <h3>Costo: ${{medi.Costo}}</h3> -->
                     <div class="btn">
                         <button class="btn btn-primary" [routerLink]="['/reservar']" routerLinkActive="router-link-active">Reservar Hora</button>
                     </div>
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
     </div>
     <div class="sinData" *ngIf="vacio">
-        <h1>Ingrese datos de busqueda correcta :(</h1>
+        <h1>Ingrese datos de busqueda correcta :</h1>
     </div>
 </div>

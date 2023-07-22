@@ -31,6 +31,9 @@ export const Medico = sequelize.define('Medico', {
     img_url: {
         type: DataTypes.STRING,
     },
+    telefono: {
+        type: DataTypes.INTEGER,
+    }
 },
     { timestamps: false }
 );
