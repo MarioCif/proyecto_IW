@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IMantenedor, IMedico, IUsuario } from 'src/app/interfaces/interfaces';
 import { RegistroService } from 'src/app/services/registro.service';
 import { CloudinaryService } from 'src/app/services/subir-imgs/cloudinary.service';
@@ -33,7 +34,7 @@ export class RegistroComponent implements OnInit {
     especialidadControl?.updateValueAndValidity();
 
   }
-  constructor(private registroS: RegistroService, private cloudinary: CloudinaryService) {
+  constructor(private registroS: RegistroService, private cloudinary: CloudinaryService, private router: Router) {
     this.addUser = new FormGroup({
       nombre: new FormControl('', Validators.required),
       apellido: new FormControl('', [Validators.required]),
@@ -110,6 +111,7 @@ export class RegistroComponent implements OnInit {
 
         this.registroS.registroUsuario(this.newUser).subscribe((res)=>{
           console.log('paciente registrado');
+          this.router.navigate(['/login']);
         },
         (error)=>{
           console.log('paciente no registrado');
@@ -130,6 +132,8 @@ export class RegistroComponent implements OnInit {
 
         this.registroS.registroMedico(this.newMedico).subscribe((res)=>{
           console.log('medico registrado');
+          this.router.navigate(['/login']);
+
         },
         (error)=>{
           console.log('medico no registrado');
@@ -150,6 +154,7 @@ export class RegistroComponent implements OnInit {
 
         this.registroS.registroMantenedor(this.newMantenedor).subscribe((res)=>{
           console.log('mantenedor registrado');
+          this.router.navigate(['/login']);
         },
         (error)=>{
           console.log('mantenedor no registrado');
