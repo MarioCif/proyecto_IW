@@ -15,6 +15,8 @@ import { SetHorarioComponent } from './components/set-horario/set-horario.compon
 import { MedicoGuard } from './guards/medico-guard.guard';
 import { SharedGuard } from './guards/shared.guard';
 import { UserGuard } from './guards/user-guard.guard';
+import { MantenedorGuard } from './guards/mantenedor.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -23,12 +25,12 @@ const routes: Routes = [
   { path:'admin',component:AdminComponent, children:[
     {path:'medicos',component: MedicosComponent},
     {path: 'pacientes', component: PacientesComponent}
-  ]},
-  { path: 'reservar', component: ReservarComponent, canActivate: [UserGuard]},
-  { path: 'citas', component: CitasComponent, canActivate: [SharedGuard]},
+  ], canActivate: [MantenedorGuard, AuthGuard]},
+  { path: 'reservar', component: ReservarComponent, canActivate: [UserGuard, AuthGuard]},
+  { path: 'citas', component: CitasComponent, canActivate: [SharedGuard, AuthGuard]},
   { path: 'registro', component: RegistroComponent},
-  { path: 'calendario', component: CalendarioComponent, canActivate: [SharedGuard]},
-  { path: 'nuevo-horario', component: SetHorarioComponent, canActivate: [MedicoGuard] },
+  { path: 'calendario', component: CalendarioComponent, canActivate: [SharedGuard, AuthGuard]},
+  { path: 'nuevo-horario', component: SetHorarioComponent, canActivate: [MedicoGuard, AuthGuard]},
   { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 

@@ -41,14 +41,9 @@ export class LoginService {
         user.email = decodedToken.email;
         user.exp = decodedToken.exp;
         user.iat = decodedToken.iat;
-
-        console.log(decodedToken);
-        console.log(user);
-        
-        
+           
 
         localStorage.setItem('currentUser', JSON.stringify(user));
-        console.log(localStorage.getItem('currentUser'));
         
         this.currentUserSubject.next(user);
       }
