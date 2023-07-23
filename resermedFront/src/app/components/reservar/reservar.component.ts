@@ -9,7 +9,9 @@ import { ICita } from 'src/app/interfaces/interfaces';
 export class ReservarComponent implements OnInit {
   precio: number = 20000;
   citasDisponibles: ICita[] = [
+    /*
     {
+      
       "fecha": "29/06/2023",
       "horaInicio": "10:00",
       "horaTermino": "10:30"
@@ -26,7 +28,7 @@ export class ReservarComponent implements OnInit {
       "horaInicio": "16:40",
       "horaTermino": "17:10"
     },
-
+    */
   ];
 
   constructor() {

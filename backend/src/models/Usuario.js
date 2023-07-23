@@ -28,6 +28,9 @@ export const Usuario = sequelize.define('Usuario', {
     img_url: {
         type: DataTypes.STRING,
     },
+    telefono: {
+        type: DataTypes.INTEGER,
+    }
 },
     { timestamps: false }
 );
