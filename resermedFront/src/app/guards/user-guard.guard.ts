@@ -9,13 +9,19 @@ export class UserGuard implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(): boolean {
-    const sessionToken = localStorage.getItem('sessionToken');
-    if (sessionToken != "usuario") {
-      this.router.navigate(['/login']);
-      return false;
-    }
+    const tokenDataString = localStorage.getItem('currentUser');
+    if(tokenDataString){
+      const tokenData = JSON.parse(tokenDataString);
+      const userType = tokenData.userType;
 
-    return true;
+      if (userType == "usuario") {
+        return true;
+      }
+
+    }
+    
+    this.router.navigate(['/login']);
+    return false;
   }
 
 }
