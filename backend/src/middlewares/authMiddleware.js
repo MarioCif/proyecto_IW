@@ -23,13 +23,3 @@ export const verifyToken = (req, res, next) => {
     })
 
 }
-
-export const getUserType = (req, res) => {
-    const token = req.header('Authorization').split(' ')[1]
-    try {
-        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-        return res.json(decodedToken.userType);
-    } catch (error) {
-        return res.json(null); //token invalido o inexistente
-    }
-}
