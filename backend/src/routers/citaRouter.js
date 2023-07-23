@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { verifyToken } from "../middlewares/authMiddleware.js";
 import {
     getCitas,
     getCitaById,
@@ -11,8 +12,8 @@ const router = Router();
 
 router.get('/citas', getCitas);
 router.get('/citas/:id', getCitaById);
-router.post('/citas', createCita);
-router.put('/citas/:id', updateCita);
-router.delete('/citas/:id', deleteCita);
+router.post('/citas', verifyToken, createCita);
+router.put('/citas/:id', verifyToken, updateCita);
+router.delete('/citas/:id', verifyToken, deleteCita);
 
 export default router;

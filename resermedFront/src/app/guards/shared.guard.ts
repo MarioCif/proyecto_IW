@@ -9,19 +9,22 @@ export class SharedGuard implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(): boolean {
-    const sessionToken = localStorage.getItem('sessionToken');
-    if (!sessionToken || sessionToken == '') {
-      this.router.navigate(['/login']);
-      return false;
-    }
+    const tokenDataString = localStorage.getItem('currentUser');
+    if(tokenDataString){
+      const tokenData = JSON.parse(tokenDataString);
+      const userType = tokenData.userType;
 
-    const allowedTokens = ['usuario', 'medico'];
-    if (!allowedTokens.includes(sessionToken)) {
-      this.router.navigate(['/home']);
-      return false;
-    }
+      const allowedTokens = ['usuario', 'medico'];
 
-    return true;
+      if (allowedTokens.includes(userType)) {
+        return true;
+      }
+
+    }
+    
+    this.router.navigate(['/login']);
+    return false;
+
   }
 
 }

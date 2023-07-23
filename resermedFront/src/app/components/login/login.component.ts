@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit{
   
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router){
+  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router, private toastr: ToastrService){
     this.loginForm = fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -21,6 +22,19 @@ export class LoginComponent implements OnInit{
   ngOnInit(): void {
 
   }
+
+  showSuccess(){
+    this.toastr.success('Éxito', 'Sesión iniciada correctamente');
+  }
+
+  showError(){
+    this.toastr.error('Error al iniciar sesión', 'Credenciales incorrectas');
+  }
+
+  showWarning(){
+    this.toastr.warning('Credenciales inválidas', 'Ingrese credenciales válidas');
+  }
+
 
   onLoginSubmit(){
     if(this.loginForm.valid){
@@ -34,16 +48,15 @@ export class LoginComponent implements OnInit{
 
       this.loginService.login(cuenta).subscribe({
         next: (res) => {
-          let rolUser = res.sessionToken;
-          localStorage.setItem('sessionToken', rolUser);
           this.router.navigate(['/home']);
-          
-
+          this.showSuccess();
         },
         error: (err) => {
-          console.log('Error al iniciar sesión:', err);
+          this.showError();
         }
       })
+    }else{
+      this.showWarning();
     }
   }
 

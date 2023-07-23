@@ -38,3 +38,12 @@ export interface IMantenedor{
     img_url:string,
     telefono:number,
 }
+
+export interface DecodedToken{
+    exp: number;
+    id: string;
+    nombre: string;
+    email: string;
+    userType: string
+    iat: number;
+}
