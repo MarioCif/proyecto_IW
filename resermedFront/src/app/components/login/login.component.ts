@@ -34,8 +34,6 @@ export class LoginComponent implements OnInit{
 
       this.loginService.login(cuenta).subscribe({
         next: (res) => {
-          let rolUser = res.sessionToken;
-          localStorage.setItem('sessionToken', rolUser);
           this.router.navigate(['/home']);
           
 

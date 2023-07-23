@@ -9,19 +9,25 @@ import { LoginService } from 'src/app/services/login/login.service';
 })
 export class HeaderComponent implements OnInit {
   toggle: boolean = false;
-  sessionToken: any;
+  userType: any;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private loginService: LoginService) {
 
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem('sessionToken')) {
-      this.sessionToken = localStorage.getItem('sessionToken');
+
+    const tokenDataString = localStorage.getItem('currentUser');
+
+    if (tokenDataString) {
+      const tokenData = JSON.parse(tokenDataString);
+      this.userType = tokenData.userType;
+
+      console.log('User Type:', this.userType);
     } else {
-      localStorage.setItem('sessionToken', '');
-      this.sessionToken = '';
+      this.userType = '';
     }
+
   }
 
   toggleMenu() {
@@ -34,7 +40,6 @@ export class HeaderComponent implements OnInit {
 
 
   cerrarSesion() {
-    localStorage.setItem('sessionToken', '');
-    window.location.reload();
+    this.loginService.logout();
   }
 }

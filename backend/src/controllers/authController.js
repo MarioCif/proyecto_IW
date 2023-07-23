@@ -9,44 +9,42 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
     var userType = '';
 
-    try {
+    var user = await Usuario.findOne({
+        where: { email }
+    })
 
-        const user = await Usuario.findOne({
+    if (!user) {
+
+        user = await Medico.findOne({
             where: { email }
         })
-        
+
         if (!user) {
-    
-            user = await Medico.findOne({
+
+            user = await Mantenedor.findOne({
                 where: { email }
             })
-    
-            if(!user){
-    
-                user = await Mantenedor.findOne({
-                    where: { email }
-                })
-    
-                if(!user) {
-                    res.status(404);
-                    res.send({ error: 'Usuario no registrado' });
-                    return;
-                }else{
-                    userType = 'mantenedor'
-                }
-            }else{
-                userType = 'medico'
+
+            if (!user) {
+                res.status(404);
+                res.send({ error: 'Usuario no registrado' });
+                return;
+            } else {
+                userType = 'mantenedor'
             }
-        }else{
-            userType = 'usuario';
+        } else {
+            userType = 'medico'
         }
-    
-        const checkPassword = await compareP(password, user.password);
+    } else {
+        userType = 'usuario';
+    }
 
-        if(!checkPassword){
-            return res.status(400).json({ message: "Correo o contraseña incorrectos" });
-        }
 
+    const checkPassword = await compareP(password, user.password);
+
+    if (!checkPassword) {
+        return res.status(400).json({ message: "Correo o contraseña incorrectos" });
+    } else {
         const payload = {
             id: user.id,
             nombre: user.nombre,
@@ -55,14 +53,13 @@ export const login = async (req, res) => {
         }
 
         console.log(payload);
-        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '12h'})
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '12h' })
 
         res.json({ token });
-        
-    } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
-
     }
-    
-    
+
+
+
+
+
 }

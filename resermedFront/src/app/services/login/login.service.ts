@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, Subject, map } from 'rxjs';
+import { DecodedToken } from 'src/app/interfaces/interfaces';
 import { environment } from 'src/environments/environments';
+import jwt_decode from "jwt-decode";
 
 const base_url = environment.url_api;
 
@@ -10,12 +12,54 @@ const base_url = environment.url_api;
 })
 export class LoginService {
 
-  constructor(private http: HttpClient) { }
+  private currentUserSubject: BehaviorSubject<any>;
+  public currentUser: Observable<any>;
 
   private readonly api_url = `${base_url}/login`;
 
-  login(cuenta = {}): Observable<any>{
-    return this.http.post<any>(`${this.api_url}`, cuenta)
+  constructor(private http: HttpClient) {
+    let storageCurrentUser: string = String(localStorage.getItem('currentUser'));
+
+    this.currentUserSubject = new BehaviorSubject<any>(localStorage.getItem('currentUser') ? JSON.parse(storageCurrentUser) : null);
+    this.currentUser = this.currentUserSubject.asObservable();
+  }
+
+  public get currentUserValue(): any{
+    return this.currentUserSubject.value;
+  }
+
+
+  login(cuenta = {}): Observable<any> {
+    console.log('logeando');
+    
+    return this.http.post<any>(`${this.api_url}`, cuenta).pipe(map((user) =>{
+      if(user && user.token){
+        const decodedToken = jwt_decode(user.token) as DecodedToken;
+        user.id = decodedToken.id;
+        user.userType = decodedToken.userType;
+        user.nombre = decodedToken.nombre;
+        user.email = decodedToken.email;
+        user.exp = decodedToken.exp;
+        user.iat = decodedToken.iat;
+
+        console.log(decodedToken);
+        console.log(user);
+        
+        
+
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        console.log(localStorage.getItem('currentUser'));
+        
+        this.currentUserSubject.next(user);
+      }
+      return user;
+    }));
+  }
+
+  logout(){
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
+    window.location.reload();
   }
 
 
