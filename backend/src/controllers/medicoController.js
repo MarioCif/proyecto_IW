@@ -24,7 +24,7 @@ export const createMedico = async (req, res) => {
     //el medico no se creara a menos que tenga un rut, email diferente
 
     try {
-        const { rut, nombre, apellido, email, password, especialidad, img_url } = req.body;
+        const { rut, nombre, apellido, email, password, especialidad, img_url, telefono } = req.body;
         const passwordHash = await encryptP(password)
 
         const newM = await Medico.create({
@@ -35,11 +35,12 @@ export const createMedico = async (req, res) => {
             password: passwordHash,
             especialidad,
             img_url,
+            telefono,
         });
 
 
         console.log(newM)
-        return res.sendStatus(200);
+        return res.status(201).json({ message: 'OK'});
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: "Error interno del servidor" });
@@ -64,7 +65,7 @@ export const deleteMedico = async (req, res) => {
             },
         });
 
-        return res.sendStatus(200);
+        return res.status(200).json({ message: 'OK'});
     } catch (error) {
         return res.status(500).json({ message: "Error interno del servidor" });
     }
@@ -73,7 +74,7 @@ export const deleteMedico = async (req, res) => {
 export const updateMedico = async (req, res) => {
     try {
         const { id } = req.params;
-        const { rut, nombre, apellido, email, password, especialidad, img_url } = req.body;
+        const { rut, nombre, apellido, email, password, especialidad, img_url, telefono } = req.body;
         const passwordHash = await encryptP(password)
 
         const medicoExistente = await Medico.findOne({
@@ -93,6 +94,7 @@ export const updateMedico = async (req, res) => {
             password: passwordHash,
             especialidad,
             img_url,
+            telefono,
 
         }, {
             where: {
@@ -100,7 +102,7 @@ export const updateMedico = async (req, res) => {
             },
         });
 
-        return res.sendStatus(200);
+        return res.status(200).json({ message: 'OK'});
     } catch (error) {
         return res.status(500).json({ message: "Error interno del servidor" });
     }
