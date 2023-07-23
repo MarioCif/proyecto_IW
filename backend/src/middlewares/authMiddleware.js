@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 const allowedTypes = ['usuario', 'medico', 'mantenedor']
 
 export const verifyToken = (req, res, next) => {
-    const token = req.header('Authorization').split(' ')[1]
+    const token = req.header('authorization').split(' ')[1]
 
     if(!token){
         return res.status(401).json({message: 'Token no existe'})

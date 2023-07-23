@@ -16,7 +16,9 @@ import { CalendarioComponent } from './components/calendario/calendario.componen
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ResultadosComponent } from './components/resultados/resultados.component';
 import { SetHorarioComponent } from './components/set-horario/set-horario.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './guards/auth.interceptor';
+import { LoginService } from './services/login/login.service';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
@@ -50,7 +52,11 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
     
   ],
-  providers: [provideNgxMask()],
+  providers: [
+    provideNgxMask(),
+    [LoginService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }]
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
