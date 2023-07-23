@@ -52,7 +52,7 @@ export class RegistroComponent implements OnInit {
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       rut: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]], 
       password: ['', Validators.required]
     });
 
