@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { IMantenedor, IMedico, IUsuario } from 'src/app/interfaces/interfaces';
 import { RegistroService } from 'src/app/services/registro.service';
 import { CloudinaryService } from 'src/app/services/subir-imgs/cloudinary.service';
@@ -16,6 +17,10 @@ export class RegistroComponent implements OnInit {
   newMedico: IMedico;
   newMantenedor: IMantenedor;
   addUser: FormGroup;
+
+  pattern = {
+    
+  }
 
   img_url: string = "";
   widget:any;
@@ -34,12 +39,12 @@ export class RegistroComponent implements OnInit {
     especialidadControl?.updateValueAndValidity();
 
   }
-  constructor(private registroS: RegistroService, private cloudinary: CloudinaryService, private router: Router) {
+  constructor(private registroS: RegistroService, private cloudinary: CloudinaryService, private router: Router, private toastr: ToastrService) {
     this.addUser = new FormGroup({
       nombre: new FormControl('', Validators.required),
       apellido: new FormControl('', [Validators.required]),
       telefono: new FormControl('', [Validators.required]),
-      rut: new FormControl('', [Validators.required, Validators.maxLength(10)]),
+      rut: new FormControl('', [Validators.required, Validators.maxLength(12)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
       tipo: new FormControl('', [Validators.required]),
@@ -97,6 +102,14 @@ export class RegistroComponent implements OnInit {
     ).subscribe(widget => this.widget = widget);
   }
 
+  showSuccess(){
+    this.toastr.success('Éxito', 'Registrado correctamente');
+  }
+
+  showWarning(){
+    this.toastr.warning('Datos repetidos', 'Rut y/o email ya están registrados');
+  }
+
   registroUser() {
 
     switch(this.addUser.get('tipo')?.value){
@@ -111,11 +124,13 @@ export class RegistroComponent implements OnInit {
 
         this.registroS.registroUsuario(this.newUser).subscribe((res)=>{
           console.log('paciente registrado');
+          this.showSuccess();
           this.router.navigate(['/login']);
         },
         (error)=>{
           console.log('paciente no registrado');
           console.log(error);
+          this.showWarning();
           
         });
 
@@ -132,12 +147,14 @@ export class RegistroComponent implements OnInit {
 
         this.registroS.registroMedico(this.newMedico).subscribe((res)=>{
           console.log('medico registrado');
+          this.showSuccess();
           this.router.navigate(['/login']);
 
         },
         (error)=>{
           console.log('medico no registrado');
           console.log(error);
+          this.showWarning();
 
         });
 
@@ -154,11 +171,13 @@ export class RegistroComponent implements OnInit {
 
         this.registroS.registroMantenedor(this.newMantenedor).subscribe((res)=>{
           console.log('mantenedor registrado');
+          this.showSuccess();
           this.router.navigate(['/login']);
         },
         (error)=>{
           console.log('mantenedor no registrado');
           console.log(error);
+          this.showWarning();
 
         });
 

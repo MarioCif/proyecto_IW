@@ -17,6 +17,10 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { ResultadosComponent } from './components/resultados/resultados.component';
 import { SetHorarioComponent } from './components/set-horario/set-horario.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+
 
 @NgModule({
   declarations: [
@@ -40,8 +44,13 @@ import { HttpClientModule } from '@angular/common/http';
     FullCalendarModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    NgxMaskDirective, NgxMaskPipe
+
+    
   ],
-  providers: [],
+  providers: [provideNgxMask()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

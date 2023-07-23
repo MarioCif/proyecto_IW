@@ -10,7 +10,7 @@ import { FooterService } from 'src/app/services/footer.service';
 export class AdminComponent implements OnInit{
   menuSelected: string = ''; 
 
-  constructor(private router:Router, private footerS:FooterService){}
+  constructor(private router: Router, private footerS:FooterService){}
 
 
   ngOnInit(): void {

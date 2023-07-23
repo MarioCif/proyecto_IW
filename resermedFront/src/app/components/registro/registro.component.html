@@ -13,11 +13,11 @@
             </div>
             <div class="form-group">
                 <label for="rut">Rut</label>
-                <input type="text" formControlName="rut" class="form-control" id="rut" placeholder="Ingrese su rut">
+                <input type="text" maxlength="12" formControlName="rut" class="form-control" id="rut" placeholder="Sin puntos ni guión" mask="00.000.000-A||0.000.000-A">
             </div>
             <div class="form-group">
                 <label for="telefono">Teléfono</label>
-                <input type="text" formControlName="telefono"  class="form-control" id="telefono" placeholder="Ingrese su número de teléfono">
+                <input type="text" formControlName="telefono" maxlength="9"  class="form-control" id="telefono" mask="000000000" placeholder="Ej: 961XXXXXX">
             </div>
 
             <div class="form-group">
