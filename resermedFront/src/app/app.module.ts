@@ -23,6 +23,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { FormularioContactoComponent } from './components/formulario-contacto/formulario-contacto.component';
+import { NosotrosComponent } from './components/nosotros/nosotros.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { FormularioContactoComponent } from './components/formulario-contacto/fo
     CalendarioComponent,
     ResultadosComponent,
     SetHorarioComponent,
-    FormularioContactoComponent
+    FormularioContactoComponent,
+    NosotrosComponent
   ],
   imports: [
     BrowserModule,

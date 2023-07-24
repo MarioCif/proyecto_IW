@@ -17,11 +17,13 @@ import { SharedGuard } from './guards/shared.guard';
 import { UserGuard } from './guards/user-guard.guard';
 import { MantenedorGuard } from './guards/mantenedor.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { NosotrosComponent } from './components/nosotros/nosotros.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'resultados', component: ResultadosComponent},
   { path:'login',component: LoginComponent},
+  {path:'nosotros',component:NosotrosComponent},
   { path:'admin',component:AdminComponent, children:[
     {path:'medicos',component: MedicosComponent},
     {path: 'pacientes', component: PacientesComponent}
