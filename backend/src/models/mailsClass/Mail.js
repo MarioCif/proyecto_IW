@@ -5,7 +5,7 @@ const OAuth2 = google.auth.OAuth2;
 const CLIENT_ID = "258182245391-dm4bvp4e14ds3a69um05piplp779qfjh.apps.googleusercontent.com";
 const CLIENT_SECRET = "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";
 const REDIRECT_URI = "https://developers.google.com/oauthplayground";
-const REFRESH_TOKEN = "ya29.a0AbVbY6PPLAcKH9u6OyECkJ_N0-TiJzJzHj295f6ZrT9jtv6OvDWarMNy8mnB8We4BbWthFarA3YCmcdG9OGPBzXceRpxRJIactZNLAHihV14teMYUAxXE5a0N_55K9rAkBqVqFmdOUHnT2M8Twri0cRqEvYBaCgYKAQoSARESFQFWKvPlE1tzfJaRU-PnGlvghPfNCg0163";
+const REFRESH_TOKEN = "ya29.a0AbVbY6N2Expm9-MwFPcZJL7jgX_eCPaAp_2pqYOxRgs_5mgE73tNhZI5OBA8yrLuJBqJVdtlQvynF7-AkwqII6x-wGITYpFoiSGF9_2UQwSGwDkHk0E-dD0ccxLRYmQj7x_Q6nJeoX0XbAula90rkRvhD__kaCgYKAcgSARESFQFWKvPlMNY7SoE0erP8OoSBXYz59g0163";
 
 
 const oauth2Client = new OAuth2(
@@ -15,7 +15,19 @@ const oauth2Client = new OAuth2(
 )
 oauth2Client.setCredentials({refresh_token: REFRESH_TOKEN});
 const accessToken = oauth2Client.getAccessToken();
-
+const smtpTransport = nodemailer.createTransport({
+    service: "gmail",
+    
+    auth: {
+        type: "OAuth2",
+        subject: "RESERMED",
+        user: "contrerasesparza2000@gmail.com",
+        clientId: CLIENT_ID,
+        clientSecret: CLIENT_SECRET,
+        refreshToken: REFRESH_TOKEN,
+        accessToken: accessToken
+    }
+});
 
 //la idea seria enviar la estructura html desde el front
 export function mailCancelarCita(nombre,correoDestino,htmlMessage){
@@ -25,19 +37,7 @@ export function mailCancelarCita(nombre,correoDestino,htmlMessage){
         generateTextFromHTLM: true,
         html: htmlMessage
     }
-    const smtpTransport = nodemailer.createTransport({
-        service: "gmail",
-        
-        auth: {
-            type: "OAuth2",
-            subject: "RESERMED",
-            user: "contrerasesparza2000@gmail.com",
-            clientId: CLIENT_ID,
-            clientSecret: CLIENT_SECRET,
-            refreshToken: REFRESH_TOKEN,
-            accessToken: accessToken
-        }
-    });
+    
 
 
     smtpTransport.sendMail(mailOptions,(error,res)=>{
@@ -46,6 +46,40 @@ export function mailCancelarCita(nombre,correoDestino,htmlMessage){
     });
 }
 
+export function enviarMailContacto(nombre,email,telefono,sobreMi){
+    let htmlMessageContacto = `
+        <h1>Hola has recibido un mensaje de un medico</h1>
+        <table>
+            <thead>
+                <th>nombre</th>
+                <th>email</th>
+                <th>telefono</th>
+                <th>comentarios</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>${nombre}</td>
+                    <td>${email}</td>
+                    <td>${telefono}</td>
+                    <td>${sobreMi}</td>
+                </tr>
+            </tbody>
+        </table>
+    `;
+    const mailOptions = {
+        from: `<${email}>`,
+        to: "eduardo.contreras1902@alumnos.ubiobio.cl", //podemos incluir el correo
+        generateTextFromHTLM: true,
+        html: htmlMessageContacto
+    }
+   
+
+
+    smtpTransport.sendMail(mailOptions,(error,res)=>{
+        error ? console.log(error): console.log(res);
+        smtpTransport.close();
+    });
+}
 
 
 

@@ -1,4 +1,9 @@
+@import url('../citas/citas.component.scss');
+
 $font: 'Nunito',sans-serif;
+a{
+    cursor: pointer;
+}
 .pie-pagina{
     width: 100%;
     background-color: #002737;

@@ -1,12 +1,12 @@
 <footer class="pie-pagina">
     <div class="grupo-1" *ngIf="showFooter">
         <div class="box">
-            <figure><a href="#"><img src="../../assets/resermed__2_.png" width="10" height="170" alt="logo"></a></figure>
+            <figure><a href="#"><img src="../../assets/resermed__2_.png"  alt="logo"></a></figure>
         </div> 
         <div class="box">
             <h2>Servicios</h2>
             <a href="#"><p>Quiénes somos</p></a>
-            <a href="#"><p>Contacto</p></a>
+            <a (click)="abrirModal()"><p>Contacto</p></a>
             <a href="#"><p>Términos y condiciones</p></a>
             <a href="#"><p>Preguntas Frecuentes</p></a>
         </div>
@@ -24,3 +24,20 @@
         <small>&copy; 2023, <b>ReserMed</b> - Todos los derechos Reservados</small>
     </div>
 </footer>
+<div class="modal" [ngStyle]="{'display':footerS.oculto}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button (click)="ocultarModal()" type="button" class="btn-close" data-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <formulario-contacto></formulario-contacto>
+            </div>
+
+            <div class="modal-footer">
+                <button (click)="ocultarModal()" type="button" class="btn btn-danger">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
