@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FooterService } from 'src/app/services/footer.service';
 
 @Component({
@@ -8,8 +9,16 @@ import { FooterService } from 'src/app/services/footer.service';
 })
 export class FooterComponent {
   showFooter: boolean;
-  constructor(footerS:FooterService){
+  constructor(public footerS:FooterService, private router:Router){
     this.showFooter = footerS.showFooter;
     console.log(this.showFooter);
+  }
+
+  abrirModal(){
+    this.footerS.abrirModal();
+
+  }
+  ocultarModal(){
+    this.footerS.ocultarModal();
   }
 }

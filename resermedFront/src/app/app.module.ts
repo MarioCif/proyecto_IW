@@ -22,6 +22,7 @@ import { LoginService } from './services/login/login.service';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { FormularioContactoComponent } from './components/formulario-contacto/formulario-contacto.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     RegistroComponent,
     CalendarioComponent,
     ResultadosComponent,
-    SetHorarioComponent
+    SetHorarioComponent,
+    FormularioContactoComponent
   ],
   imports: [
     BrowserModule,
