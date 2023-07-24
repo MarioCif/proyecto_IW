@@ -22,7 +22,6 @@ export class RegistroService {
         this.Amessage.next(message);
     }
 
-
     registroUsuario(newUser = {}):Observable<IUsuario>{
       return this.http.post<any>(`${this.api_url}/usuarios`,newUser);
     }
