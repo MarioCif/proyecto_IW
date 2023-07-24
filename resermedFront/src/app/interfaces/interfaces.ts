@@ -1,9 +1,14 @@
 export interface ICita {
     id: number,
-    fecha: string
-    horaInicio: string,
-    horaTermino: string,
-    costo: number,
+    fecha: string,
+    hora_inicio: string,
+    hora_termino: string,
+    observacion: string,
+    asiste: boolean,
+    pagada: boolean,
+    libre: boolean,
+    UsuarioId: number | any,
+    MedicoId: number
 }
 
 export interface IMedico{
@@ -46,4 +51,13 @@ export interface DecodedToken{
     email: string;
     userType: string
     iat: number;
+}
+
+export interface ParamCitas{
+    duracion: number,
+    intervalo: number,
+    protegido1: string,
+    protegido2: string,
+    jornadaI: string,
+    jornadaT: string
 }

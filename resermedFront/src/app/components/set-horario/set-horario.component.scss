@@ -20,7 +20,7 @@
     }
 
     #jornada-termino-label {
-    margin: 0 10px 0 20px;
+        margin: 0 10px 0 20px;
     }
 
 }
@@ -152,6 +152,7 @@
 .protegido-input {
     align-items: center;
     justify-content: space-between;
+    width: 250px;
 
     h6 {
         margin-bottom: 18px;
@@ -161,4 +162,8 @@
         flex: 1;
         margin: 10px 5px 20px 5px;
     }
+}
+
+.a{
+    margin: 0 30px 0 10px;
 }
