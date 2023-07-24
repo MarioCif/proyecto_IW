@@ -21,6 +21,7 @@ export interface IMedico{
     password:string,
     img_url:string,
     telefono:number,
+    direccion: string
 }
 export interface IUsuario{
     id: number,

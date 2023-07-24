@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IMedico } from 'src/app/interfaces/interfaces';
+import { MedicoService } from 'src/app/services/medico.service';
 import { RegistroService } from 'src/app/services/registro.service';
 
 @Component({
@@ -11,46 +12,13 @@ import { RegistroService } from 'src/app/services/registro.service';
 })
 export class ResultadosComponent implements OnInit, OnDestroy{
 
-  medicos: IMedico [] = [/*
-    {
-      "Nombre": 'Charles Frayer Hamilton',
-      "Ubicacion": 'Chillan',
-      "Especialidad": 'Oftalmologo',
-      "Valoracion": 5,
-      "Foto": "../../../assets/img/img-doctores/p1.png",
-      "Costo": 20000  
-    },
-    {
-      "Nombre": 'Eduardo Contreras Esparza',
-      "Ubicacion": 'Chillan Viejo',
-      "Especialidad": 'Urologo',
-      "Valoracion": 3,
-      "Foto": "../../../assets/img/img-doctores/p11.png",
-      "Costo": 23000
-    },
-    {
-      "Nombre": 'Valeria Ideal Sanhueza',
-      "Ubicacion": 'Lota',
-      "Especialidad": 'Neurologa',
-      "Valoracion": 4,
-      "Foto": "../../../assets/img/img-doctores/p4.png",
-      "Costo": 35000
-    },
-    { 
-      "Nombre": 'Miguel Poblete Quintana',
-      "Ubicacion": 'Atacama',
-      "Especialidad": 'Dentista',
-      "Valoracion": 5,
-      "Foto": "../../../assets/img/img-doctores/p7.jpg",
-      "Costo": 45000
-    }*/
-  ];
+  medicos: IMedico[] = [];
 
   message!:string;
   subs!:Subscription;
   vacio:boolean = false;
 
-  constructor(private data: RegistroService){}
+  constructor(private data: RegistroService, private medicoService: MedicoService){}
 
   ngOnInit(): void {
     this.subs = this.data.current.subscribe(message => this.message = message)
@@ -59,6 +27,10 @@ export class ResultadosComponent implements OnInit, OnDestroy{
     }else{
       this.vacio = false;
     }
+
+    this.medicoService.getMedicos().subscribe((res) =>{
+      this.medicos = res;
+    }) 
   }
 
   ngOnDestroy(): void {

@@ -73,7 +73,8 @@ export class RegistroComponent implements OnInit {
       password: '',
       especialidad: '',
       img_url: '',
-      telefono: 0
+      telefono: 0,
+      direccion: ''
     }
 
     this.newMantenedor = {
