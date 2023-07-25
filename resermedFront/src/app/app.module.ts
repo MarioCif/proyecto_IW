@@ -24,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { FormularioContactoComponent } from './components/formulario-contacto/formulario-contacto.component';
 import { NosotrosComponent } from './components/nosotros/nosotros.component';
+import { PreguntasFrecuentesComponent } from './components/preguntas-frecuentes/preguntas-frecuentes.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { NosotrosComponent } from './components/nosotros/nosotros.component';
     ResultadosComponent,
     SetHorarioComponent,
     FormularioContactoComponent,
-    NosotrosComponent
+    NosotrosComponent,
+    PreguntasFrecuentesComponent
   ],
   imports: [
     BrowserModule,

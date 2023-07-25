@@ -18,6 +18,7 @@ import { UserGuard } from './guards/user-guard.guard';
 import { MantenedorGuard } from './guards/mantenedor.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { NosotrosComponent } from './components/nosotros/nosotros.component';
+import { PreguntasFrecuentesComponent } from './components/preguntas-frecuentes/preguntas-frecuentes.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'registro', component: RegistroComponent},
   { path: 'calendario', component: CalendarioComponent, canActivate: [SharedGuard, AuthGuard]},
   { path: 'nuevo-horario', component: SetHorarioComponent, canActivate: [MedicoGuard, AuthGuard]},
+  { path: 'preguntas-frecuentes', component: PreguntasFrecuentesComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
