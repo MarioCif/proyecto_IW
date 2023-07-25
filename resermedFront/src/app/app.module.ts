@@ -60,7 +60,7 @@ import { DireccionFilterPipe } from './pipes/direccion-filter.pipe';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({positionClass: 'toast-bottom-right'}),
     NgxMaskDirective, NgxMaskPipe
 
     
