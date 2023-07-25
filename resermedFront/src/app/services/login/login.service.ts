@@ -15,6 +15,7 @@ export class LoginService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
+  public session = new BehaviorSubject<boolean>(false);
   private readonly api_url = `${base_url}/login`;
 
   constructor(private http: HttpClient) {
@@ -41,8 +42,8 @@ export class LoginService {
         user.email = decodedToken.email;
         user.exp = decodedToken.exp;
         user.iat = decodedToken.iat;
-           
 
+        
         localStorage.setItem('currentUser', JSON.stringify(user));
         
         this.currentUserSubject.next(user);
@@ -51,7 +52,13 @@ export class LoginService {
     }));
   }
 
-  
+  setSession(si:boolean){
+    this.session.next(si);
+  }
+
+  getSession(){
+    return this.session.asObservable();
+  }
 
   logout(){
     localStorage.removeItem('currentUser');

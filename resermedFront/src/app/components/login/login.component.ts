@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit{
 
       this.loginService.login(cuenta).subscribe({
         next: (res) => {
+          this.loginService.setSession(true);
           this.router.navigate(['/home']);
           this.showSuccess();
         },
