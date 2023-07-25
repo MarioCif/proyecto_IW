@@ -18,8 +18,8 @@
                                 <h3>{{modalService.citaProx.Medico.especialidad }}</h3>
                                 <h3>{{modalService.citaProx.Medico.nombre + ' '+ modalService.citaProx.Medico.apellido}}</h3>
                                 <p>{{modalService.citaProx.fecha | date: 'dd-MM-yyyy'}}</p>
-                                <p>{{modalService.citaProx.hora_inicio}}</p>
-                                <p>{{modalService.citaProx.hora_termino}}</p>
+                                <p>{{modalService.citaProx.hora_inicio | timeFormat}}</p>
+                                <p>{{modalService.citaProx.hora_termino | timeFormat}}</p>
                                 <p>Ubicación: Hospital Herminda Martin</p>
                             </div>
                             <div class="direccion">

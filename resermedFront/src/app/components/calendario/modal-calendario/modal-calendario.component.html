@@ -14,9 +14,9 @@
                     <div class="datos">
                         <h3>{{medico.especialidad}}</h3>
                         <h3>{{medico.nombre}} {{medico.apellido}}</h3>
-                        <p>Fecha: {{cita.fecha}}</p>
-                        <p>Hora de Inicio: {{cita.hora_inicio}}</p>
-                        <p>Hora de Termino: {{cita.hora_termino}}</p>
+                        <p>Fecha: {{cita.fecha | date: 'dd-MM-yyyy'}}</p>
+                        <p>Hora de Inicio: {{cita.hora_inicio | timeFormat}}</p>
+                        <p>Hora de Termino: {{cita.hora_termino | timeFormat}}</p>
                         <p *ngIf="cita.observacion != null">Observaciones: {{cita.observacion}}</p>
                     </div>
                 </div>

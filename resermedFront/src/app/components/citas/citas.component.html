@@ -7,8 +7,8 @@
         </div>
         <div class="datos">
             <h3>Especialidad: {{proxCita.Medico.especialidad}}</h3>
-            <p>Hora inicio: {{proxCita.hora_inicio}}</p>
-            <p>Hora Termino: {{proxCita.hora_termino}}</p>
+            <p>Hora inicio: {{proxCita.hora_inicio | timeFormat}}</p>
+            <p>Hora Termino: {{proxCita.hora_termino | timeFormat}}</p>
             <button class="btn btn-primary" (click)="abrirModalItemProx(proxCita,'p')">Ver mas Detalles</button>
         </div>
     </div>
@@ -26,8 +26,8 @@
 
                     <tr *ngFor="let item of resul; index as i">
                         <td>{{item.Medico.especialidad}}</td>
-                        <td>{{item.hora_inicio}}</td>
-                        <td>{{item.hora_termino}}</td>
+                        <td>{{item.hora_inicio | timeFormat}}</td>
+                        <td>{{item.hora_termino | timeFormat}}</td>
                         <td class="btnesp"><button class="btn btn-primary" (click)="abrirModalItem(i,item)">Ver mas
                                 Detalles</button></td>
                     </tr>
