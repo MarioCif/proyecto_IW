@@ -67,8 +67,12 @@ export class SetHorarioComponent implements OnInit {
     this.toastr.success('Éxito', 'Cita creada correctamente');
   }
 
+  showSuccessSemana(){
+    this.toastr.success('Éxito', 'Citas creadas correctamente');
+  }
+
   showError(){
-    this.toastr.error('Fracaso', 'Rut y/o email ya están registrados');
+    this.toastr.error('Fracaso', 'Verifique que ingresó un costo y parámetros de cita');
   }
 
   citaSemana(duracion: any, intervalo:any, protegido1:any, protegido2: any, jornadaI:any, jornadaT:any, costo: any){
@@ -89,7 +93,7 @@ export class SetHorarioComponent implements OnInit {
     this.newParams.costo = costo;
 
     this.citaS.crearCitaSema(this.newParams, this.newCita.MedicoId).subscribe( (res) => {
-      this.showSuccess();
+      this.showSuccessSemana();
     }, (error) => {
       this.showError();
     })

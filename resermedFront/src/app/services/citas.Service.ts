@@ -23,7 +23,11 @@ export class CitasService {
         return this.http.post<any>(`${this.api_url}/citasSem/${id}`, newParams);
     }
 
-    getCitas(): Observable<ICita>{
-        return this.http.get<any>(this.api_url);
+    getCitas(): Observable<ICita[]>{
+        return this.http.get<any>(`${this.api_url}/citas`);
+    }
+
+    updateCita(newCit = {}, id: number): Observable<ICita>{
+        return this.http.put<any>(`${this.api_url}/citas/${id}`, newCit);
     }
 }

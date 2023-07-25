@@ -48,6 +48,47 @@ img {
             display: flex;
             flex-direction: column;
             align-self: center;
+            justify-content: space-evenly;
+
+            .btn-reservar {
+                background: linear-gradient(to right, #4caf50 0%, #4caf50 50%, #006426 50%, #006426 100%);
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                cursor: pointer;
+                background-size: 200% 100%;
+                transition: background-position 0.3s ease;
+                margin-bottom: 5px;
+                margin-top: 5px;
+            }
+        
+            .btn-reservar:hover {
+                background-position: -100% 0;
+            }
+
+            .btn-pagar {
+                background: linear-gradient(to right, #4C7AAF 0%, #4C7AAF 50%, #00336d 50%, #00336d 100%);
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                cursor: pointer;
+                background-size: 200% 100%;
+                transition: background-position 0.3s ease;
+                margin-bottom: 5px;
+                margin-top: 5px;
+            }
+        
+            .btn-pagar:hover {
+                background-position: -100% 0;
+            }
         }
     }
 }
@@ -74,3 +115,28 @@ img {
 }
 
 
+.cardsContainer {
+    height: 70vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 90%;
+
+    &::-webkit-scrollbar {
+        width: 7px;
+        margin-left: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #002737;
+        border-radius: 10px;
+    }
+
+    &-form {
+        @extend .cardsContainer;
+        height: 60vh !important;
+    }
+}
