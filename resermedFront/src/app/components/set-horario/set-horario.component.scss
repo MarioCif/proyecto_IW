@@ -25,6 +25,16 @@
 
 }
 
+.costo{
+    margin-top: 2vh;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    #costo-cita{
+        margin: 0 20px 0 10px;
+    }
+}
+
 .set-horario h3{
     margin-top: 50px;
     margin-bottom: 20px;

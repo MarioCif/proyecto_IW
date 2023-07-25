@@ -32,6 +32,9 @@ export const Cita = sequelize.define('Cita', {
         type: DataTypes.BOOLEAN,
         defaultValue: true
     },
+    costo: {
+        type: DataTypes.FLOAT,
+    },
 
 },
     { timestamps: false }
