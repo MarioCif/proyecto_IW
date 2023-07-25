@@ -24,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { FormularioContactoComponent } from './components/formulario-contacto/formulario-contacto.component';
 import { NosotrosComponent } from './components/nosotros/nosotros.component';
+import { PreguntasFrecuentesComponent } from './components/preguntas-frecuentes/preguntas-frecuentes.component';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { EspecialidadFilterPipe } from './pipes/especialidad-filter.pipe';
 import { DireccionFilterPipe } from './pipes/direccion-filter.pipe';
@@ -45,6 +46,7 @@ import { DireccionFilterPipe } from './pipes/direccion-filter.pipe';
     SetHorarioComponent,
     FormularioContactoComponent,
     NosotrosComponent,
+    PreguntasFrecuentesComponent,
     SearchFilterPipe,
     EspecialidadFilterPipe,
     DireccionFilterPipe
