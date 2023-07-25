@@ -42,8 +42,8 @@
                                 <h3>{{modalService.citaActual.Medico.especialidad }}</h3>
                                 <h3>{{modalService.citaActual.Medico.nombre + ' '+ modalService.citaActual.Medico.apellido}}</h3>
                                 <p>{{modalService.citaActual.fecha | date: 'dd-MM-yyyy'}}</p>
-                                <p>{{modalService.citaActual.hora_inicio}}</p>
-                                <p>{{modalService.citaActual.hora_termino}}</p>
+                                <p>{{modalService.citaActual.hora_inicio | timeFormat}}</p>
+                                <p>{{modalService.citaActual.hora_termino | timeFormat}}</p>
                                 <p>Ubicación: Hospital Herminda Martin</p>
                             </div>
                             <div class="direccion">
