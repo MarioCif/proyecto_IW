@@ -19,16 +19,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.sub = this.data.current.subscribe(message => this.message = message);
   }
 
-  onEnter(message: string) {
-    this.message = message;
-    this.data.updateAmessage(this.message);
-    this.router.navigateByUrl('/resultados');
-  }
-
-  onClick(message: string) {
-    this.message = message;
-    this.data.updateAmessage(this.message);
-  }
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
