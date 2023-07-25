@@ -12,15 +12,9 @@ function formatDate(date) {
 }
 
 export const getPagoUsuarioAuthenticado = async (req, res) => {
-    /* const { minutesToPay, cuotas, description, detail, redirection } = req.body;
-
-    const timeAviableToPay = 7*60*60000;
-    const cantidadCuotas = cuotas != null ? cuotas : 12;
-    const descripcion = description != null ? description : 'resermed '
-    const detalle = detail != null ? detail : `pago ` */
+    
     const {idUser,idCita,redirection} = req.body;
-    //const cantidadCuotas = cuotas != null ? cuotas : 12;
-
+    
     try {
         //Obtener usuario authenticado
         const usuario = await Usuario.findByPk(idUser);
