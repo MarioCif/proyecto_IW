@@ -216,10 +216,11 @@ $font: 'Nunito', sans-serif;
 }
 
 .cardsContainer {
-    height: 70vh;
+    display: flex;
+    justify-content: center;
     overflow-x: hidden;
     overflow-y: auto;
-    width: 90%;
+    width: 100%;
 
     &::-webkit-scrollbar {
         width: 7px;
@@ -239,4 +240,65 @@ $font: 'Nunito', sans-serif;
         @extend .cardsContainer;
         height: 60vh !important;
     }
+}
+
+@media screen and (max-width: 800px) {
+    .wrapper {
+        height: 100%;
+        overflow: auto;
+        background-color: #ebebeb;
+    }
+    
+    
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 50px;
+    }
+
+    .searchBar {
+        width: 25rem;
+        background-color: white;
+        border-radius: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .search-item {
+        width: 500px;
+        margin: 0 0;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        padding: 15px;
+        transition: all 0.25s ease-in-out;
+    
+        img {
+            padding-left: 10px;
+            width: 100%;
+            object-fit: contain;
+            height: 150px;
+        }
+    }
+
+    .filters {
+        padding: 7px;
+        margin-bottom: 3vh;
+        .especialidad-filter {
+            flex-direction: column;
+        }
+    
+        .direccion-filter {
+            flex-direction: column;
+        }
+    }
+
+    .filters {
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        height: fit-content;
+        background-color: #f1f1f1;
+    }
+
 }

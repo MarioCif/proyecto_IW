@@ -229,13 +229,14 @@ $font: 'Nunito', sans-serif;
             opacity: 0;
         }
 
-        width: 18rem;
+        width: 20rem;
     }
 
     .list {
-        margin-top: 30%;
-        margin-right: 15px;
-        margin-left: 15px;
+        margin-top: 6%;
+        margin-right: 3vw;
+        margin-left: 3vw;
+        margin-bottom: 10%;
         background-color: #f7f7f7;
         border-radius: 10px;
         ul {
@@ -262,7 +263,7 @@ $font: 'Nunito', sans-serif;
     }
 
     .tittle{
-        margin-top: 30%;
+        margin-top: 6%;
         margin-left: 5px;
         margin-right: 5px;
         display: flex;

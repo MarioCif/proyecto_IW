@@ -33,4 +33,8 @@ export class CitasService {
     getCitasById(id:number):Observable<any>{
         return this.http.get<any>(`${this.api_url}/citasMed/${id}`);
     }
+
+    getCitaById(id: number): Observable<any>{
+        return this.http.get<any>(`${this.api_url}/citas/${id}`);
+    }
 }

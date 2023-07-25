@@ -64,3 +64,9 @@ export interface ParamCitas{
     jornadaT: string,
     costo: number
 }
+
+export interface IEvent{
+    title: string,
+    start: string,
+    end: string
+}
