@@ -108,7 +108,15 @@ export const updateMedico = async (req, res) => {
     } catch (error) {
         return res.status(500).json({ message: "Error interno del servidor" });
     }
+
+    
 }
 
-
+export const getMedicosByIdManteiner = async (req,res) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+}
 
