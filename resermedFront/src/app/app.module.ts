@@ -28,6 +28,10 @@ import { PreguntasFrecuentesComponent } from './components/preguntas-frecuentes/
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { EspecialidadFilterPipe } from './pipes/especialidad-filter.pipe';
 import { DireccionFilterPipe } from './pipes/direccion-filter.pipe';
+import { DateFilterPipe } from './pipes/date-filter.pipe';
+import { CitaByMedFilterPipe } from './pipes/cita-by-med-filter.pipe';
+import { TimeFormatPipe } from './pipes/time-format.pipe';
+import { CitaLibrePipe } from './pipes/cita-libre.pipe';
 
 
 @NgModule({
@@ -49,7 +53,11 @@ import { DireccionFilterPipe } from './pipes/direccion-filter.pipe';
     PreguntasFrecuentesComponent,
     SearchFilterPipe,
     EspecialidadFilterPipe,
-    DireccionFilterPipe
+    DireccionFilterPipe,
+    DateFilterPipe,
+    CitaByMedFilterPipe,
+    TimeFormatPipe,
+    CitaLibrePipe
   ],
   imports: [
     BrowserModule,
