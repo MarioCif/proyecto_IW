@@ -1,35 +1,37 @@
 <div class="wrapper">
     <div class="search-content">
         <div action="" class="searchBar">
-            <input #box type="search" id="inputSearch" class="form-control" placeholder="Buscar profesional" value="{{message}}" (keydown.enter)="onEnter(box.value)"/>
+            <input type="search" [(ngModel)]="searchTerm" id="inputSearch" class="form-control" placeholder="Buscar profesional" autocomplete="off"/>
             <div class="searchButton">
-                <button type="button" class="" id="btnSearch" (click)="onClick(box.value)">
+                <button type="button" class="" id="btnSearch" >
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
         </div>
     </div>
     <h1 class="resultado">Resultados</h1>
-    <div class="cards">
-        <div *ngFor="let medi of medicos">
-            <div class="card"  *ngIf="compare(medi.especialidad, box.value)
-            || compare(medi.direccion, box.value) || compare(medi.nombre, box.value)">
-                <div class="img">
-                    <img src="{{medi.img_url}}">
-                </div>
-                <div>
-                    <h3>{{medi.nombre}}</h3>
-                    <h3>{{medi.direccion}}</h3>
-                    <h3>{{medi.especialidad}}</h3>
-                    
-                    <div class="btn">
-                        <button class="btn btn-primary" [routerLink]="['/reservar']" routerLinkActive="router-link-active">Reservar Hora</button>
+    <div class="resultados-body">
+        <div class="filters">
+            
+        </div>
+        <div class="resultados cards">
+            <div *ngFor="let medi of medicos | searchFilter: searchTerm">
+    
+                    <div class="img">
+                        <img src="{{medi.img_url}}">
                     </div>
-                </div>
+                    <div>
+                        <h3>{{medi.nombre}}</h3>
+                        <h3>{{medi.direccion}}</h3>
+                        <h3>{{medi.especialidad}}</h3>
+                        
+                        <div class="btn">
+                            <button class="btn btn-primary" [routerLink]="['/reservar/', medi.id]" routerLinkActive="router-link-active">Reservar Hora</button>
+                        </div>
+                    </div>
+                
             </div>
         </div>
     </div>
-    <div class="sinData" *ngIf="vacio">
-        <h1>Ingrese datos de busqueda correcta :</h1>
-    </div>
+
 </div>

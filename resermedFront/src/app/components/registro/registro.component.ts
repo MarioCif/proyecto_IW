@@ -27,16 +27,20 @@ export class RegistroComponent implements OnInit {
 
   onChangeUserType(value: any) {
     let especialidadControl = this.addUser.get('especialidad');
+    let direccionControl = this.addUser.get('direccion');
     if (value.target.value == "Profesional") {
       this.esMedico = true;
       especialidadControl?.setValidators([Validators.required]);
+      direccionControl?.setValidators([Validators.required]);
 
     } else {
       this.esMedico = false;
       especialidadControl?.clearValidators();
+      direccionControl?.clearValidators();
     }
 
     especialidadControl?.updateValueAndValidity();
+    direccionControl?.updateValueAndValidity();
 
   }
   constructor(private registroS: RegistroService, private cloudinary: CloudinaryService, private router: Router, private toastr: ToastrService) {
@@ -49,6 +53,7 @@ export class RegistroComponent implements OnInit {
       password: new FormControl('', [Validators.required]),
       tipo: new FormControl('', [Validators.required]),
       especialidad: new FormControl(''),
+      direccion: new FormControl(''),
       
     });
 

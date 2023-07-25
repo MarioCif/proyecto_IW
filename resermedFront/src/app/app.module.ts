@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -24,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { FormularioContactoComponent } from './components/formulario-contacto/formulario-contacto.component';
 import { NosotrosComponent } from './components/nosotros/nosotros.component';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { NosotrosComponent } from './components/nosotros/nosotros.component';
     ResultadosComponent,
     SetHorarioComponent,
     FormularioContactoComponent,
-    NosotrosComponent
+    NosotrosComponent,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,7 @@ import { NosotrosComponent } from './components/nosotros/nosotros.component';
     AdminModule,
     FullCalendarModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),

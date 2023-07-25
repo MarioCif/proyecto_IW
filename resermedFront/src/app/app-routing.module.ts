@@ -28,7 +28,7 @@ const routes: Routes = [
     {path:'medicos',component: MedicosComponent},
     {path: 'pacientes', component: PacientesComponent}
   ], canActivate: [MantenedorGuard, AuthGuard]},
-  { path: 'reservar', component: ReservarComponent, canActivate: [UserGuard, AuthGuard]},
+  { path: 'reservar/:id', component: ReservarComponent, canActivate: [UserGuard, AuthGuard]},
   { path: 'citas', component: CitasComponent, canActivate: [SharedGuard, AuthGuard]},
   { path: 'registro', component: RegistroComponent},
   { path: 'calendario', component: CalendarioComponent, canActivate: [SharedGuard, AuthGuard]},
