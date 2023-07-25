@@ -18,7 +18,7 @@ a{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 50px;
-    padding: 45px 0px;
+    padding: 35px 0px;
 }
 
 .pie-pagina .grupo-1 .box figure{
@@ -30,7 +30,7 @@ a{
 }
 
 .pie-pagina .grupo-1 .box figure img{
-    width: 250px;
+    width: 190px;
 }
 
 .pie-pagina .grupo-1 .box h2{
@@ -96,9 +96,9 @@ a{
 @media screen and (max-width:800px){
     .pie-pagina .grupo-1{
         width: 90%;
-        grid-template-columns: repeat(1, 1fr);
-        grid-gap: 30px;
-        padding: 35px 0px;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 10px;
+        padding: 23px 0px;
     }
     .pie-pagina .grupo-1 .box figure img{
         align-items: center;
@@ -109,6 +109,10 @@ a{
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .pie-pagina .grupo-1 .box figure img{
+        width: 190px;
     }
 }
 .activateFooter{

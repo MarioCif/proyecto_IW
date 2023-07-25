@@ -7,7 +7,8 @@ import {
     updateCita,
     deleteCita,
     crarCitasSemana,
-    getCitasById
+    getCitasById,
+    getCitasOcupadasById
 } from "../controllers/citaController.js";
 
 const router = Router();
@@ -15,6 +16,7 @@ const router = Router();
 router.get('/citas', getCitas);
 router.get('/citas/:id', getCitaById);
 router.get('/citasMed/:id',getCitasById);
+router.get('/citasOcupadas/:rol/:id', getCitasOcupadasById);
 router.post('/citas', verifyToken, createCita);
 router.post('/citasSem/:id', verifyToken, crarCitasSemana);
 router.put('/citas/:id', verifyToken, updateCita);

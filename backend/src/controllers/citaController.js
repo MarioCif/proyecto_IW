@@ -1,5 +1,6 @@
 import { Cita } from "../models/Cita.js";
 import {Medico} from "../models/Medico.js";
+import { Op } from "sequelize";
 
 export const getCitas = async (req, res) => {
     try {
@@ -121,6 +122,37 @@ export const updateCita = async (req, res) => {
         });
 
         return res.status(200).json( { message: "oki :3"} );
+    } catch (error) {
+        return res.status(500).json({ message: "Error interno del servidor" });
+    }
+}
+
+export const getCitasOcupadasById = async (req, res) => {
+
+    const { rol, id } = req.params;
+
+    let user;
+
+    try {
+
+        if(rol === "usuario"){
+            user = await Cita.findAll({
+                where: {
+                    UsuarioId: id
+                }
+            })
+        }else if(rol === "medico"){
+                user = await Cita.findAll({
+                where: {
+                    UsuarioId: {
+                        [Op.not]: null
+                    },
+                    MedicoId: id
+                }
+            })
+        }
+
+        return res.status(200).json(user)
     } catch (error) {
         return res.status(500).json({ message: "Error interno del servidor" });
     }
