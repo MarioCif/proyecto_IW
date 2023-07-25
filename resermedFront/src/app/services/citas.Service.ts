@@ -30,4 +30,7 @@ export class CitasService {
     updateCita(newCit = {}, id: number): Observable<ICita>{
         return this.http.put<any>(`${this.api_url}/citas/${id}`, newCit);
     }
+    getCitasById(id:number):Observable<any>{
+        return this.http.get<any>(`${this.api_url}/citasMed/${id}`);
+    }
 }

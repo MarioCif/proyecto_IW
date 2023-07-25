@@ -60,7 +60,7 @@ table{
     margin-bottom: 5vh;
     text-align: justify;
     thead{
-        border-bottom: 0.5px solid;
+        
         th{
             font-family: $font;
             font-size: 1.5rem;
@@ -84,4 +84,10 @@ table{
             }
         }
     }
+}
+
+.scroll-table{
+  max-height: 300px; /* Establece la altura máxima del contenedor */
+  overflow-y: auto;
+  margin-bottom: 50px;
 }

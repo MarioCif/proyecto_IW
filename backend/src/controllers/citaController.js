@@ -1,4 +1,5 @@
 import { Cita } from "../models/Cita.js";
+import {Medico} from "../models/Medico.js";
 
 export const getCitas = async (req, res) => {
     try {
@@ -17,6 +18,24 @@ export const getCitaById = async (req, res) => {
         res.status(500).json({ message: 'Error al obtener la cita.' });
     }
 };
+
+export const getCitasById = async (req,res) =>{
+    let usId = req.params.id;
+    try {
+        const citasByIdMedico = await Cita.findAll({
+            include: [Medico],
+            where: {
+                UsuarioId: usId
+            },
+            attributes: ['id','Medico.id','Medico.nombre','Medico.apellido','Medico.especialidad','Medico.img_url','fecha','hora_inicio','hora_termino'],
+            order: [['fecha','ASC']]
+        });
+        res.status(200).json(citasByIdMedico)
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ message: error });
+    }
+} 
 
 export const createCita = async (req, res) => {
 
