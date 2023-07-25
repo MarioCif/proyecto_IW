@@ -32,6 +32,8 @@ import { DateFilterPipe } from './pipes/date-filter.pipe';
 import { CitaByMedFilterPipe } from './pipes/cita-by-med-filter.pipe';
 import { TimeFormatPipe } from './pipes/time-format.pipe';
 import { CitaLibrePipe } from './pipes/cita-libre.pipe';
+import { ModalCalendarioComponent } from './components/calendario/modal-calendario/modal-calendario.component';
+
 
 
 @NgModule({
@@ -57,7 +59,8 @@ import { CitaLibrePipe } from './pipes/cita-libre.pipe';
     DateFilterPipe,
     CitaByMedFilterPipe,
     TimeFormatPipe,
-    CitaLibrePipe
+    CitaLibrePipe,
+    ModalCalendarioComponent
   ],
   imports: [
     BrowserModule,
