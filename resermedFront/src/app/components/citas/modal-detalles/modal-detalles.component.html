@@ -1,4 +1,4 @@
-<div class="modal" [ngStyle]="{'display':modalService.oculto}" tabindex="-1" role="dialog">
+<div class="modal" [ngStyle]="{'display':modalService.oculto}" tabindex="-1" role="dialog" *ngIf="modalService.modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,22 +7,54 @@
             </div>
 
             <div class="modal-body">
-                <div class="card">
-                    <div class="imagen">
-                        <img src="../../../../assets/img/p1.png">
-                    </div>
-                    <div class="datos">
-                        <h3>Oftalmología</h3>
-                        <h3>Charles Freyer Hamilton</h3>
-                        <p>Fecha: 29/06/2023</p>
-                        <p>Hora de Inicio: 10:30pm</p>
-                        <p>Hora de Termino: 12:30pm</p>
-                        <p>Ubicación: Hospital Herminda Martin</p>
-                    </div>
-                    <div class="direccion">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3808.705779922142!2d-72.09409957145702!3d-36.60888268454749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x966929d526abd2ff%3A0x9595cf599f1e16b6!2sHospital%20Cl%C3%ADnico%20Chillan%20Herminda%20Mart%C3%ADn!5e0!3m2!1ses!2scl!4v1688089267037!5m2!1ses!2scl" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                </div>
+                <div *ngIf="modalService.tipo == 'p'; then contenidoVerdadero else contenidoFalso"></div>
+
+                    <ng-template #contenidoVerdadero>
+                        <div class="card">
+                            <div class="imagen">
+                                <img [src]="modalService.img" alt="foto proximo">
+                            </div>
+                            <div class="datos">
+                                <h3>{{modalService.citaProx.Medico.especialidad }}</h3>
+                                <h3>{{modalService.citaProx.Medico.nombre + ' '+ modalService.citaProx.Medico.apellido}}</h3>
+                                <p>{{modalService.citaProx.fecha | date: 'dd-MM-yyyy'}}</p>
+                                <p>{{modalService.citaProx.hora_inicio}}</p>
+                                <p>{{modalService.citaProx.hora_termino}}</p>
+                                <p>Ubicación: Hospital Herminda Martin</p>
+                            </div>
+                            <div class="direccion">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3808.705779922142!2d-72.09409957145702!3d-36.60888268454749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x966929d526abd2ff%3A0x9595cf599f1e16b6!2sHospital%20Cl%C3%ADnico%20Chillan%20Herminda%20Mart%C3%ADn!5e0!3m2!1ses!2scl!4v1688089267037!5m2!1ses!2scl"
+                                    width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                        </div>
+
+
+                    </ng-template>
+
+                    <ng-template #contenidoFalso>
+                        <div class="card">
+                            <div class="imagen">
+                                <img [src]="modalService.img" alt="foto actual">
+                            </div>
+                            <div class="datos">
+                                <h3>{{modalService.citaActual.Medico.especialidad }}</h3>
+                                <h3>{{modalService.citaActual.Medico.nombre + ' '+ modalService.citaActual.Medico.apellido}}</h3>
+                                <p>{{modalService.citaActual.fecha | date: 'dd-MM-yyyy'}}</p>
+                                <p>{{modalService.citaActual.hora_inicio}}</p>
+                                <p>{{modalService.citaActual.hora_termino}}</p>
+                                <p>Ubicación: Hospital Herminda Martin</p>
+                            </div>
+                            <div class="direccion">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3808.705779922142!2d-72.09409957145702!3d-36.60888268454749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x966929d526abd2ff%3A0x9595cf599f1e16b6!2sHospital%20Cl%C3%ADnico%20Chillan%20Herminda%20Mart%C3%ADn!5e0!3m2!1ses!2scl!4v1688089267037!5m2!1ses!2scl"
+                                    width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                        </div>
+                    </ng-template>
+                
             </div>
 
             <div class="modal-footer">
