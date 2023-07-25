@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
@@ -10,6 +11,9 @@ import { LoginService } from 'src/app/services/login/login.service';
 export class HeaderComponent implements OnInit {
   toggle: boolean = false;
   userType: any;
+  public session!: Observable<boolean>;
+  rol: string = "";
+  sessionOn: boolean = false;
 
   constructor(private router: Router, private loginService: LoginService) {
 
@@ -19,15 +23,21 @@ export class HeaderComponent implements OnInit {
 
     const tokenDataString = localStorage.getItem('currentUser');
 
-    if (tokenDataString) {
-      const tokenData = JSON.parse(tokenDataString);
-      this.userType = tokenData.userType;
+    this.session = this.loginService.getSession();
 
-      console.log('User Type:', this.userType);
-    } else {
-      this.userType = '';
+    this.session.subscribe( (data) => {
+      this.sessionOn = data;
+      if(this.sessionOn === true){
+        this.getUser();
+      }
+    })
+
+    if(this.sessionOn === false){
+      console.log("chao")
+      this.getSesion()
+    }else if(this.sessionOn === true){
+      this.getUser();
     }
-
   }
 
   toggleMenu() {
@@ -41,5 +51,25 @@ export class HeaderComponent implements OnInit {
 
   cerrarSesion() {
     this.loginService.logout();
+  }
+
+  getSesion(){
+    const tokenDataString = localStorage.getItem('currentUser');
+    if(tokenDataString != null){
+      this.sessionOn = true;
+      if(tokenDataString){
+        const tokenData = JSON.parse(tokenDataString);
+        const id = tokenData.userType;
+        this.userType = id;
+      }
+    }
+  }
+
+  getUser(){
+    const tokenDataString = localStorage.getItem('currentUser');
+    if(tokenDataString != null){
+      const tokenData = JSON.parse(tokenDataString);
+      this.userType = tokenData.userType;
+    }
   }
 }
