@@ -23,6 +23,7 @@ export class SetHorarioComponent implements OnInit {
     asiste: false,
     pagada: false,
     libre: true,
+    costo: 0,
     UsuarioId: null,
     MedicoId: 1
   };
@@ -33,14 +34,15 @@ export class SetHorarioComponent implements OnInit {
     protegido1: "",
     protegido2: "",
     jornadaI: "",
-    jornadaT: ""
+    jornadaT: "",
+    costo: 0
   }
 
   constructor(public citaS: CitasService, private toastr: ToastrService){}
 
   ngOnInit(): void {}
 
-  citaDia(fecha:any, inicio:any, termino:any){
+  citaDia(fecha:any, inicio:any, termino:any, costo:any){
     
     this.user = localStorage.getItem("currentUser");
     if(this.user){
@@ -52,6 +54,7 @@ export class SetHorarioComponent implements OnInit {
     this.newCita.fecha = fecha;
     this.newCita.hora_inicio = inicio;
     this.newCita.hora_termino = termino;
+    this.newCita.costo = costo;
 
     this.citaS.crearCita(this.newCita).subscribe((res) => {
       this.showSuccess();
@@ -68,15 +71,24 @@ export class SetHorarioComponent implements OnInit {
     this.toastr.error('Fracaso', 'Rut y/o email ya están registrados');
   }
 
-  citaSemana(duracion: any, intervalo:any, protegido1:any, protegido2: any, jornadaI:any, jornadaT:any){
+  citaSemana(duracion: any, intervalo:any, protegido1:any, protegido2: any, jornadaI:any, jornadaT:any, costo: any){
+
+    this.user = localStorage.getItem("currentUser");
+    if(this.user){
+      const tokenData = JSON.parse(this.user);
+      const id = tokenData.id;
+      this.newCita.MedicoId = parseInt(id);
+    }
+
     this.newParams.duracion = duracion;
     this.newParams.intervalo = intervalo;
     this.newParams.protegido1 = protegido1;
     this.newParams.protegido2 = protegido2;
     this.newParams.jornadaI = jornadaI;
     this.newParams.jornadaT = jornadaT;
+    this.newParams.costo = costo;
 
-    this.citaS.crearCitaSema(this.newParams).subscribe( (res) => {
+    this.citaS.crearCitaSema(this.newParams, this.newCita.MedicoId).subscribe( (res) => {
       this.showSuccess();
     }, (error) => {
       this.showError();

@@ -8,6 +8,10 @@
             <label for="" id="jornada-termino-label">Término de jornada:</label>
             <input #jornadaTermino type="time">
         </div>
+        <div class="costo d-flex">
+            <label for="" id="costo-cita">Costo inicial Cita:</label>
+            <input #costoCita type="number" min="0">
+        </div>
         <div class="set-horario">
             <h3 class="text-center">Selecciona el método para agregar citas</h3>
             <div class="metodos-cita d-flex">
@@ -27,7 +31,7 @@
                         <label for="">Hora de término:</label>
                         <input #terminoin type="time">
                     </div>
-                    <button type="button" class="btn btn-success" (click)="citaDia(fechain.value, inicioin.value, terminoin.value)">Agregar
+                    <button type="button" class="btn btn-success" (click)="citaDia(fechain.value, inicioin.value, terminoin.value, costoCita.value)">Agregar
                         <i class="fa-regular fa-calendar-plus"></i>
                     </button>
                 </div>
@@ -70,7 +74,7 @@
                     
                     <button type="button" class="btn btn-success" 
                     (click)="citaSemana(duracion.value, intervalo.value, protegido1.value, 
-                    protegido2.value, jornadaInicio.value, jornadaTermino.value)">Agregar
+                    protegido2.value, jornadaInicio.value, jornadaTermino.value, costoCita.value)">Agregar
                         <i class="fa-regular fa-calendar-plus"></i>
                     </button>
 
