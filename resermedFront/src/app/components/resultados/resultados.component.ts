@@ -10,58 +10,51 @@ import { RegistroService } from 'src/app/services/registro.service';
   templateUrl: './resultados.component.html',
   styleUrls: ['./resultados.component.scss']
 })
-export class ResultadosComponent implements OnInit, OnDestroy {
+export class ResultadosComponent implements OnInit {
 
   medicos: IMedico[] = [];
   searchTerm: string = '';
+  filtroEspecialidad: string = '';
+  filtroDireccion: string = '';
   message!: string;
   subs!: Subscription;
-  vacio: boolean = false;
+  especialidades: string [] = [
+    'Cardiología',
+    'Dermatología',
+    'Endocrinología',
+    'Fonoaudiología',
+    'Gastrenterología',
+    'Geriatría',
+    'Ginecología',
+    'Hematología',
+    'Inmunología',
+    'Kinesiología',
+    'Medicina General',
+    'Nefrología',
+    'Neurología',
+    'Nutrición',
+    'Obstetricia',
+    'Oftamología',
+    'Oncología',
+    'Odontología',
+    'Otorrinolaringología',
+    'Pediatría',
+    'Psicología',
+    'Psiquiatría',
+    'Traumatología',
+    'Urología'
+  ];
+  
 
-  constructor(private data: RegistroService, private medicoService: MedicoService) { }
+  constructor(private medicoService: MedicoService) { }
 
   ngOnInit(): void {
-    this.subs = this.data.current.subscribe(message => this.message = message)
-    if (this.message == "") {
-      this.vacio = true;
-    } else {
-      this.vacio = false;
-    }
 
     this.medicoService.getMedicos().subscribe((res) => {
       this.medicos = res;
-    })
+    });
+
+
   }
 
-  ngOnDestroy(): void {
-    this.subs.unsubscribe();
-  }
-
-  onClick(message: string) {
-    this.message = message;
-    this.data.updateAmessage(this.message);
-    if (this.message == "") {
-      this.vacio = true;
-    } else {
-      this.vacio = false;
-    }
-  }
-
-  onEnter(message: string) {
-    this.message = message;
-    this.data.updateAmessage(this.message);
-    if (this.message == "") {
-      this.vacio = true;
-    } else {
-      this.vacio = false;
-    }
-  }
-
-  compare(val1: string, val2: string): boolean {
-    if (val1.includes(val2) && val2 != "") {
-      return true;
-    } else {
-      return false;
-    }
-  }
 }

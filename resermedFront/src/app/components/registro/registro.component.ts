@@ -17,10 +17,33 @@ export class RegistroComponent implements OnInit {
   newMedico: IMedico;
   newMantenedor: IMantenedor;
   addUser: FormGroup;
+  especialidades: string [] = [
+    'Cardiología',
+    'Dermatología',
+    'Endocrinología',
+    'Fonoaudiología',
+    'Gastrenterología',
+    'Geriatría',
+    'Ginecología',
+    'Hematología',
+    'Inmunología',
+    'Kinesiología',
+    'Medicina General',
+    'Nefrología',
+    'Neurología',
+    'Nutrición',
+    'Obstetricia',
+    'Oftamología',
+    'Oncología',
+    'Odontología',
+    'Otorrinolaringología',
+    'Pediatría',
+    'Psicología',
+    'Psiquiatría',
+    'Traumatología',
+    'Urología'
+  ];
 
-  pattern = {
-    
-  }
 
   img_url: string = "";
   widget:any;
@@ -149,6 +172,7 @@ export class RegistroComponent implements OnInit {
         this.newMedico.password = this.addUser.get('password')?.value;
         this.newMedico.telefono = this.addUser.get('telefono')?.value;
         this.newMedico.especialidad = this.addUser.get('especialidad')?.value;
+        this.newMedico.direccion = this.addUser.get('direccion')?.value
         this.newMedico.img_url = this.img_url;
 
         this.registroS.registroMedico(this.newMedico).subscribe((res)=>{

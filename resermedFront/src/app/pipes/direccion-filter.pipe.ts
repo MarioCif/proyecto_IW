@@ -1,19 +1,20 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'searchFilter'
+  name: 'direccionFilter'
 })
-export class SearchFilterPipe implements PipeTransform {
+export class DireccionFilterPipe implements PipeTransform {
 
   transform(items: any[], term: string): any[] {
-    // console.log(term);
+    console.log(term);
     if (!term) {
       return items;
     }
 
     return items.filter(item => 
-      item.nombre.toLowerCase().includes(term.toLowerCase())
+      item.direccion.toLowerCase().includes(term.toLowerCase())
       );
   }
+
 
 }

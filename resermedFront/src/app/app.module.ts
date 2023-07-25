@@ -25,6 +25,8 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { FormularioContactoComponent } from './components/formulario-contacto/formulario-contacto.component';
 import { NosotrosComponent } from './components/nosotros/nosotros.component';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { EspecialidadFilterPipe } from './pipes/especialidad-filter.pipe';
+import { DireccionFilterPipe } from './pipes/direccion-filter.pipe';
 
 
 @NgModule({
@@ -43,7 +45,9 @@ import { SearchFilterPipe } from './pipes/search-filter.pipe';
     SetHorarioComponent,
     FormularioContactoComponent,
     NosotrosComponent,
-    SearchFilterPipe
+    SearchFilterPipe,
+    EspecialidadFilterPipe,
+    DireccionFilterPipe
   ],
   imports: [
     BrowserModule,

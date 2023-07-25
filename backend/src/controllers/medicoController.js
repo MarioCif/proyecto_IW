@@ -36,6 +36,7 @@ export const createMedico = async (req, res) => {
             especialidad,
             img_url,
             telefono,
+            direccion
         });
 
 
@@ -95,6 +96,7 @@ export const updateMedico = async (req, res) => {
             especialidad,
             img_url,
             telefono,
+            direccion,
 
         }, {
             where: {
