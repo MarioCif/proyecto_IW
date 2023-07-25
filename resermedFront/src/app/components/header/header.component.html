@@ -38,7 +38,7 @@
 
         <div class="navbar-links"[class.navbar-links-show]="toggle" *ngSwitchCase="''">
             <ul>
-                <li><a href="">Quiénes Somos</a></li>
+                <li><a [routerLink]="['/nosotros']">Quiénes Somos</a></li>
                 <li><a [routerLink]="['/login']" routerLinkActive="router-link-active" >Iniciar Sesión</a></li>
                 <li><a [routerLink]="['/registro']" routerLinkActive="router-link-active">Registrarse</a></li>
             </ul>

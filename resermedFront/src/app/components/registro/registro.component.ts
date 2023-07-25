@@ -17,26 +17,53 @@ export class RegistroComponent implements OnInit {
   newMedico: IMedico;
   newMantenedor: IMantenedor;
   addUser: FormGroup;
+  especialidades: string [] = [
+    'Cardiología',
+    'Dermatología',
+    'Endocrinología',
+    'Fonoaudiología',
+    'Gastrenterología',
+    'Geriatría',
+    'Ginecología',
+    'Hematología',
+    'Inmunología',
+    'Kinesiología',
+    'Medicina General',
+    'Nefrología',
+    'Neurología',
+    'Nutrición',
+    'Obstetricia',
+    'Oftamología',
+    'Oncología',
+    'Odontología',
+    'Otorrinolaringología',
+    'Pediatría',
+    'Psicología',
+    'Psiquiatría',
+    'Traumatología',
+    'Urología'
+  ];
 
-  pattern = {
-    
-  }
 
   img_url: string = "";
   widget:any;
 
   onChangeUserType(value: any) {
     let especialidadControl = this.addUser.get('especialidad');
+    let direccionControl = this.addUser.get('direccion');
     if (value.target.value == "Profesional") {
       this.esMedico = true;
       especialidadControl?.setValidators([Validators.required]);
+      direccionControl?.setValidators([Validators.required]);
 
     } else {
       this.esMedico = false;
       especialidadControl?.clearValidators();
+      direccionControl?.clearValidators();
     }
 
     especialidadControl?.updateValueAndValidity();
+    direccionControl?.updateValueAndValidity();
 
   }
   constructor(private registroS: RegistroService, private cloudinary: CloudinaryService, private router: Router, private toastr: ToastrService) {
@@ -49,6 +76,7 @@ export class RegistroComponent implements OnInit {
       password: new FormControl('', [Validators.required]),
       tipo: new FormControl('', [Validators.required]),
       especialidad: new FormControl(''),
+      direccion: new FormControl(''),
       
     });
 
@@ -73,7 +101,8 @@ export class RegistroComponent implements OnInit {
       password: '',
       especialidad: '',
       img_url: '',
-      telefono: 0
+      telefono: 0,
+      direccion: ''
     }
 
     this.newMantenedor = {
@@ -143,6 +172,7 @@ export class RegistroComponent implements OnInit {
         this.newMedico.password = this.addUser.get('password')?.value;
         this.newMedico.telefono = this.addUser.get('telefono')?.value;
         this.newMedico.especialidad = this.addUser.get('especialidad')?.value;
+        this.newMedico.direccion = this.addUser.get('direccion')?.value
         this.newMedico.img_url = this.img_url;
 
         this.registroS.registroMedico(this.newMedico).subscribe((res)=>{

@@ -51,6 +51,8 @@ export class LoginService {
     }));
   }
 
+  
+
   logout(){
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);

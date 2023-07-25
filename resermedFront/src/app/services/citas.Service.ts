@@ -22,4 +22,8 @@ export class CitasService {
     crearCitaSema(newParams = {}, id:number): Observable<ParamCitas>{
         return this.http.post<any>(`${this.api_url}/citasSem/${id}`, newParams);
     }
+
+    getCitas(): Observable<ICita>{
+        return this.http.get<any>(this.api_url);
+    }
 }

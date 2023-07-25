@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -25,6 +25,9 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { FormularioContactoComponent } from './components/formulario-contacto/formulario-contacto.component';
 import { NosotrosComponent } from './components/nosotros/nosotros.component';
 import { PreguntasFrecuentesComponent } from './components/preguntas-frecuentes/preguntas-frecuentes.component';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { EspecialidadFilterPipe } from './pipes/especialidad-filter.pipe';
+import { DireccionFilterPipe } from './pipes/direccion-filter.pipe';
 
 
 @NgModule({
@@ -43,7 +46,10 @@ import { PreguntasFrecuentesComponent } from './components/preguntas-frecuentes/
     SetHorarioComponent,
     FormularioContactoComponent,
     NosotrosComponent,
-    PreguntasFrecuentesComponent
+    PreguntasFrecuentesComponent,
+    SearchFilterPipe,
+    EspecialidadFilterPipe,
+    DireccionFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -51,9 +57,10 @@ import { PreguntasFrecuentesComponent } from './components/preguntas-frecuentes/
     AdminModule,
     FullCalendarModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({positionClass: 'toast-bottom-right'}),
     NgxMaskDirective, NgxMaskPipe
 
     

@@ -1,12 +1,12 @@
 <div class="wrapper">
 
 
-    <div class="search-content">
+    <div class="search-content" (click)="onClick(box.value)" [routerLink]="['/resultados']">
         <h1>Encuentra una cita con tu especialista</h1>
         <form action="" class="searchBar">
             <input #box type="search" id="inputSearch" class="form-control" placeholder="Buscar profesional" (keydown.enter)="onEnter(box.value)"/>
             <div class="searchButton">
-                <button type="button" class="" id="btnSearch" (click)="onClick(box.value)" [routerLink]="['/resultados']" routerLinkActive="router-link-active" >
+                <button type="button" class="" id="btnSearch" routerLinkActive="router-link-active" >
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>

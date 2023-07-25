@@ -33,6 +33,9 @@ export const Medico = sequelize.define('Medico', {
     },
     telefono: {
         type: DataTypes.INTEGER,
+    },
+    direccion: {
+        type: DataTypes.STRING,
     }
 },
     { timestamps: false }

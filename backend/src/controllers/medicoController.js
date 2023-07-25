@@ -24,7 +24,7 @@ export const createMedico = async (req, res) => {
     //el medico no se creara a menos que tenga un rut, email diferente
 
     try {
-        const { rut, nombre, apellido, email, password, especialidad, img_url, telefono } = req.body;
+        const { rut, nombre, apellido, email, password, especialidad, img_url, telefono, direccion } = req.body;
         const passwordHash = await encryptP(password)
 
         const newM = await Medico.create({
@@ -36,6 +36,7 @@ export const createMedico = async (req, res) => {
             especialidad,
             img_url,
             telefono,
+            direccion
         });
 
 
@@ -74,7 +75,7 @@ export const deleteMedico = async (req, res) => {
 export const updateMedico = async (req, res) => {
     try {
         const { id } = req.params;
-        const { rut, nombre, apellido, email, password, especialidad, img_url, telefono } = req.body;
+        const { rut, nombre, apellido, email, password, especialidad, img_url, telefono, direccion } = req.body;
         const passwordHash = await encryptP(password)
 
         const medicoExistente = await Medico.findOne({
@@ -95,6 +96,7 @@ export const updateMedico = async (req, res) => {
             especialidad,
             img_url,
             telefono,
+            direccion,
 
         }, {
             where: {
