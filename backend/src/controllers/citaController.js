@@ -21,7 +21,7 @@ export const getCitaById = async (req, res) => {
 export const createCita = async (req, res) => {
 
     try {
-        const { fecha, hora_inicio, hora_termino, observacion, asiste, pagada, libre, UsuarioId, MedicoId } = req.body;
+        const { fecha, hora_inicio, hora_termino, observacion, asiste, pagada, libre, costo, UsuarioId, MedicoId } = req.body;
 
         const newC = await Cita.create({
             fecha,
@@ -31,6 +31,7 @@ export const createCita = async (req, res) => {
             asiste,
             pagada,
             libre,
+            costo,
             UsuarioId,
             MedicoId
         });
@@ -71,7 +72,7 @@ export const deleteCita = async (req, res) => {
 export const updateCita = async (req, res) => {
     try {
         const { id } = req.params;
-        const { fecha, hora_inicio, hora_termino, observacion, asiste, pagada, libre, UsuarioId, MedicoId } = req.body;
+        const { fecha, hora_inicio, hora_termino, observacion, asiste, pagada, libre, costo, UsuarioId, MedicoId } = req.body;
 
         const citaExistente = await Cita.findOne({
             where: {
@@ -90,6 +91,7 @@ export const updateCita = async (req, res) => {
             asiste,
             pagada,
             libre,
+            costo,
             UsuarioId,
             MedicoId
 
@@ -108,45 +110,142 @@ export const updateCita = async (req, res) => {
 export const crarCitasSemana = async (req, res) =>{
     try {
         const { id } = req.params;
-        const { duracion, intervalo, protegido1, protegido2, jornadaI, jornadaT } = req.body;
+        const { duracion, intervalo, protegido1, protegido2, jornadaI, jornadaT, costo } = req.body;
 
         const d = new Date();
-        // let day = d.getDay();
-        let day = 1;
+        let day = d.getDay();
         let Inicio = new Date("07/06/2021 "+jornadaI);
         let Termino = new Date("07/06/2021 "+jornadaT);
         let ProtegidoI = new Date("07/06/2021 "+protegido1);
         let ProtegidoT = new Date("07/06/2021 "+protegido2);
 
-        let dif = minutesDiff(ProtegidoT, ProtegidoI);
-        console.log(dif);
+        let protec = minutesDiff(ProtegidoT, ProtegidoI);
+        let minMñn = minutesDiff(ProtegidoI, Inicio);
+        let minTarde = minutesDiff(Termino, ProtegidoT);
+        let citasMñn, citasTarde, dif;
 
-        const newCita = await Cita.create({
-            
-        });
+        if(parseInt(intervalo) == 0){
+            citasMñn = Math.floor(minMñn/parseInt(duracion));
+            citasTarde = Math.floor(minTarde/parseInt(duracion));
+        }else{
+            citasMñn = Math.floor(minMñn/(parseInt(duracion) + parseInt(intervalo)));
+            citasTarde = Math.floor(minTarde/(parseInt(duracion) + parseInt(intervalo)));
+        }
+        var today = new Date();
 
-        // while(day != 0 && day != 6){
+        while(day != 0 && day != 6){
             if(parseInt(intervalo) == 0){
-                while(Inicio.getHours() <= Termino.getHours()){
-                    if(Inicio.getHours() == ProtegidoI.getHours()){
-                        if(Inicio.getMinutes() <= ProtegidoI.getMinutes() || Inicio.getMinutes() > ProtegidoI.getMinutes()){
-                            addMinutes(Inicio, dif);
-                        }
-                    }else{
-                        addMinutes(Inicio, parseInt(duracion));
-                    }
-                } 
+
+                for(let i = 0; i < citasMñn; i++){
+                    let inicio = Inicio.getHours() + ":" + Inicio.getMinutes();
+                    addMinutes(Inicio, parseInt(duracion));
+                    let termino = Inicio.getHours() + ":" + Inicio.getMinutes();
+
+                    const newCita = await Cita.create({
+                        fecha: today.toISOString().slice(0, 10),
+                        hora_inicio: inicio,
+                        hora_termino: termino,
+                        asiste: false,
+                        pagada: false,
+                        costo: costo,
+                        libre: true,
+                        MedicoId: id
+                    })
+                }
+
+                if(Inicio.getHours() < ProtegidoI.getHours()){
+                    dif = minutesDiff(ProtegidoI, Inicio);
+
+                    addMinutes(Inicio, parseInt(dif));
+                    
+                    addMinutes(Inicio, protec)
+                }else if(Inicio.getHours() == ProtegidoI.getHours()){
+                    dif = minutesDiff(ProtegidoT, Inicio);
+
+                    addMinutes(Inicio, dif);
+                }
+
+                for(let i = 0; i < citasTarde; i++){
+                    let inicio = Inicio.getHours() + ":" + Inicio.getMinutes();
+                    addMinutes(Inicio, parseInt(duracion));
+                    let termino = Inicio.getHours() + ":" + Inicio.getMinutes();
+
+                    const newCita = await Cita.create({
+                        fecha: today.toISOString().slice(0, 10),
+                        hora_inicio: inicio,
+                        hora_termino: termino,
+                        asiste: false,
+                        pagada: false,
+                        costo: costo,
+                        libre: true,
+                        MedicoId: id
+                    })
+                }
+
             }else{
+                for(let i = 0; i < citasMñn; i++){
+                    let inicio = Inicio.getHours() + ":" + Inicio.getMinutes();
+                    console.log(inicio)
+                    addMinutes(Inicio, parseInt(duracion));
+                    let termino = Inicio.getHours() + ":" + Inicio.getMinutes();
+                    console.log(termino)
 
+                    addMinutes(Inicio, parseInt(intervalo));
+
+                    const newCita = await Cita.create({
+                        fecha: today.toISOString().slice(0, 10),
+                        hora_inicio: inicio,
+                        hora_termino: termino,
+                        asiste: false,
+                        pagada: false,
+                        costo: costo,
+                        libre: true,
+                        MedicoId: id
+                    })
+                }
+
+                if(Inicio.getHours() < ProtegidoI.getHours()){
+                    dif = minutesDiff(ProtegidoI, Inicio);
+
+                    addMinutes(Inicio, parseInt(dif));
+                    
+                    addMinutes(Inicio, protec)
+
+                }else if(Inicio.getHours() == ProtegidoI.getHours()){
+                    dif = minutesDiff(ProtegidoT, Inicio);
+
+                    addMinutes(Inicio, dif);
+                }
+
+                for(let i = 0; i < citasTarde; i++){
+                    let inicio = Inicio.getHours() + ":" + Inicio.getMinutes();
+                    console.log(inicio);
+                    addMinutes(Inicio, parseInt(duracion));
+                    let termino = Inicio.getHours() + ":" + Inicio.getMinutes();
+                    console.log(termino);
+
+                    addMinutes(Inicio, parseInt(intervalo));
+
+                    const newCita = await Cita.create({
+                        fecha: today.toISOString().slice(0, 10),
+                        hora_inicio: inicio,
+                        hora_termino: termino,
+                        asiste: false,
+                        pagada: false,
+                        costo: costo,
+                        libre: true,
+                        MedicoId: id
+                    })
+                }
             }
-
-            day++;
 
             Inicio = new Date("01 Jan 1970 "+jornadaI);
             Termino = new Date("01 Jan 1970 "+jornadaT); 
-            
-        // }
-        return res.status(200).json({ message: intervalo, Inicio, Termino, ProtegidoI, ProtegidoT });
+            today.setDate(today.getDate() + 1);
+            day++;
+
+        }
+        return res.status(200).json({ message: "Oki" });
     } catch (error) {
         return res.status(500).json({ message: "Error interno del servidor"});
     }

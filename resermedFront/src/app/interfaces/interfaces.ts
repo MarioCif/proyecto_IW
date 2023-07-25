@@ -7,6 +7,7 @@ export interface ICita {
     asiste: boolean,
     pagada: boolean,
     libre: boolean,
+    costo: number,
     UsuarioId: number | any,
     MedicoId: number
 }
@@ -60,5 +61,6 @@ export interface ParamCitas{
     protegido1: string,
     protegido2: string,
     jornadaI: string,
-    jornadaT: string
+    jornadaT: string,
+    costo: number
 }
