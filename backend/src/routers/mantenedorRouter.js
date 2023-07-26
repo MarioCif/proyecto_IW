@@ -15,6 +15,6 @@ router.get('/mantenedores/:id', getMantenedorById);
 router.post('/mantenedores', createMantenedor);
 router.put('/mantenedores/:id', updateMantenedor);
 router.delete('/mantenedores/:id', deleteMantenedor);
-router.post('/medicosByM/:id',getMedicosByIdManteiner);
+router.get('/medicosByM/:id',getMedicosByIdManteiner);
 
 export default router;

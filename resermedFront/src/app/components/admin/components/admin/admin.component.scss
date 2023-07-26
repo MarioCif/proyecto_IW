@@ -9,7 +9,7 @@ $colorBarra: #002737;
     background-color: $colorBarra;
 }
 #tableContent{
-    display: flex;
+    display: block;
     width: 100%;
     flex-direction: column-reverse;
     justify-content: start;
