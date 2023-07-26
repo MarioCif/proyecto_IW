@@ -6,6 +6,7 @@ import mantenedorRouter from './routers/mantenedorRouter.js';
 import citaRouter from './routers/citaRouter.js';
 import authRouter from './routers/authRouter.js';
 import mailRouter from './routers/mailRouter.js';
+import pagoRouter from './routers/pagoRouter.js';
 const whiteList=['http://localhost:4200','...'];
 const app = express();
 
@@ -25,5 +26,6 @@ app.use(medicoRouter);
 app.use(mantenedorRouter);
 app.use(citaRouter);
 app.use(authRouter);
-app.use(mailRouter)
+app.use(mailRouter);
+app.use(pagoRouter);
 export default app;

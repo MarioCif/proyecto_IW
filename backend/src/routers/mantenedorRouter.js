@@ -6,6 +6,7 @@ import {
     updateMantenedor,
     deleteMantenedor,
 } from "../controllers/mantenedorController.js";
+import { getMedicosByIdManteiner } from "../controllers/medicoController.js";
 
 const router = Router();
 
@@ -14,5 +15,6 @@ router.get('/mantenedores/:id', getMantenedorById);
 router.post('/mantenedores', createMantenedor);
 router.put('/mantenedores/:id', updateMantenedor);
 router.delete('/mantenedores/:id', deleteMantenedor);
+router.post('/medicosByM/:id',getMedicosByIdManteiner);
 
 export default router;
