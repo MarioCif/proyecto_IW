@@ -68,15 +68,28 @@ $font: 'Nunito',sans-serif;
     
 }
 
+.dropdown{
+    position: initial;
+}
+
 .dropdown-menu {
     position: absolute;
-    top: .7rem;
     right: 1rem;
     display: none;
     flex-direction: column;
     justify-content: space-between;
-    width: 30px;
-    height: 21px;
+    background-color: #002737;
+    border: none;
+    align-items: flex-end;
+    text-decoration: none;
+    min-width: 4rem;
+    padding-right: 20px;
+    
+    .fa-solid{
+        font-size: 2rem;
+        font-weight: 900;
+        color: white;
+    }
 }
 
 .burger-menu {
