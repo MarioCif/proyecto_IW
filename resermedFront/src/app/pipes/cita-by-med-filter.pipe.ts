@@ -9,7 +9,7 @@ export class CitaByMedFilterPipe implements PipeTransform {
     if (medicoId == null) {
       return items;
     }
-
+    console.log(items);
     return items.filter(item => item.MedicoId == medicoId);
   }
 

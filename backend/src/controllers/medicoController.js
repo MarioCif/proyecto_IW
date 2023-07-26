@@ -1,4 +1,5 @@
 
+import { where } from "sequelize";
 import { compareP, encryptP } from "../helpers/handleBcrypt.js";
 import { Medico } from "../models/Medico.js";
 
@@ -114,9 +115,62 @@ export const updateMedico = async (req, res) => {
 
 export const getMedicosByIdManteiner = async (req,res) => {
     try {
-        
+        const id = req.params.id;
+
+        const medicosByMantenedor = await Medico.findAll({
+            where: {
+                MantenedorId: id
+            }
+        });
+
+        res.status(200).json(medicosByMantenedor);
     } catch (error) {
+        res.status(500).json({ message: "Error al obtener medicos." });
+    }
+}
+
+export const getMedicosLibres = async (req,res) =>{
+    try {
+        const medicosLibres = await Medico.findAll({
+            where: {
+                MantenedorId: null
+            }
+        })
+        res.status(200).json(medicosLibres);
+    } catch (error) {
+        res.status(500).json({ message: error });
+    }
+}
+export const updateIdMantenedorMedico = async (req,res)=>{
+    try {
+        const {idMedico,idMantenedor} = req.params;
+        const updateIdMantMedico = await Medico.update({MantenedorId: idMantenedor}, 
+            {
+                where: {
+                    id: idMedico
+                }
+            }   
+        )
         
+        res.status(200).json({message: "id actualizado", body: updateIdMantMedico});
+    } catch (error) {
+        res.status(500).json({ message: error });
+    }
+}
+export const updateIdMantenedorNull = async (req,res)=>{
+    try {
+        const {idMedico} = req.params;
+        const updateIdMantMedico = await Medico.update({MantenedorId: null}, 
+            {
+                where: {
+                    id: idMedico
+                }
+            }   
+        )
+        
+        res.status(200).json({message: "id actualizado", body: updateIdMantMedico});
+    } catch (error) {
+        res.status(500).json({ message: error });
     }
 }
 

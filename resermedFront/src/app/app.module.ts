@@ -33,6 +33,7 @@ import { CitaByMedFilterPipe } from './pipes/cita-by-med-filter.pipe';
 import { TimeFormatPipe } from './pipes/time-format.pipe';
 import { CitaLibrePipe } from './pipes/cita-libre.pipe';
 import { ModalCalendarioComponent } from './components/calendario/modal-calendario/modal-calendario.component';
+import { MedLibrePipe } from './pipes/med-libre.pipe';
 
 
 
