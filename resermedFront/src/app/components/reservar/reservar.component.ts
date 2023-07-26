@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ICita, IMedico } from 'src/app/interfaces/interfaces';
+import { ICita, IMedico, IUsuario } from 'src/app/interfaces/interfaces';
 import { CitasService } from 'src/app/services/citas.Service';
+import { MailService } from 'src/app/services/mail.service';
 import { MedicoService } from 'src/app/services/medico.service';
 import { PagoService } from 'src/app/services/pago.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-reservar',
@@ -17,10 +19,11 @@ export class ReservarComponent implements OnInit {
   citasDisponibles: ICita[] = [];
   medicoId: number = 0;
   medico!: IMedico;
+  user!: IUsuario;
 
 
 
-  constructor(private citas: CitasService, private route: ActivatedRoute, private medicoService: MedicoService, private toastr: ToastrService, private pago: PagoService) { }
+  constructor(private citas: CitasService, private route: ActivatedRoute, private medicoService: MedicoService, private toastr: ToastrService, private pago: PagoService, private mail: MailService, private usuarioS: UsuarioService) { }
 
   ngOnInit(): void {
     this.medicoId = this.route.snapshot.params['id'];
@@ -33,6 +36,10 @@ export class ReservarComponent implements OnInit {
       this.citasDisponibles = res;
 
     });
+
+    this.usuarioS.getUsuarioById(this.currentUserId).subscribe((res) => {
+      this.user = res;
+    })
 
 
   }
@@ -63,6 +70,7 @@ export class ReservarComponent implements OnInit {
 
   reservarCita(cita: ICita, observacion: string) {
 
+
     let userId = this.currentUserId;
 
 
@@ -74,6 +82,22 @@ export class ReservarComponent implements OnInit {
 
     this.citas.updateCita(cita, cita.id).subscribe((res) => {
       this.showSuccess();
+      let body = {
+        nombre1: this.user.nombre,
+        apellido1: this.user.apellido,
+        nombre2: this.medico.nombre,
+        apellido2: this.medico.apellido,
+        email1: this.user.email,
+        email2: this.medico.email,
+        fecha: cita.fecha,
+        hora1: cita.hora_inicio,
+        hora2: cita.hora_termino
+      }
+      this.mail.correoReservar(body).subscribe((res) => {
+        console.log('mail enviado');
+
+      })
+
     },
       (error) => {
         this.showError();
@@ -90,7 +114,7 @@ export class ReservarComponent implements OnInit {
 
     cita.UsuarioId = idUser;
     cita.libre = false;
-
+    cita.pagada = true;
 
     if (observacion != null) {
       cita.observacion = observacion
@@ -98,22 +122,43 @@ export class ReservarComponent implements OnInit {
 
     this.citas.updateCita(cita, cita.id).subscribe((res) => {
 
+      let body = {
+        nombre1: this.user.nombre,
+        apellido1: this.user.apellido,
+        nombre2: this.medico.nombre,
+        apellido2: this.medico.apellido,
+        email1: this.user.email,
+        email2: this.medico.email,
+        fecha: cita.fecha,
+        hora1: cita.hora_inicio,
+        hora2: cita.hora_termino
+      }
+
       this.pago.pagar(idUser, cita.id, redirection).subscribe((res) => {
 
-        cita.pagada = true;
+
         window.location.href = res.body;
 
-        
+        this.mail.correoReservar(body).subscribe((res) => {
+          console.log('mail enviado');
+    
+    
+    
+        },
+          (error) => {
+            this.showError();
+          });
+
+
       },
         (error) => {
           console.log(error);
+          this.showError();
+
 
         })
 
-    },
-      (error) => {
-        this.showError();
-      })
+    })
 
 
 
