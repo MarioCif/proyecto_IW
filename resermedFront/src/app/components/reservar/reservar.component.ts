@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ICita, IMedico } from 'src/app/interfaces/interfaces';
+import { ICita, IMedico, IUsuario } from 'src/app/interfaces/interfaces';
 import { CitasService } from 'src/app/services/citas.Service';
+import { MailService } from 'src/app/services/mail.service';
 import { MedicoService } from 'src/app/services/medico.service';
+import { PagoService } from 'src/app/services/pago.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-reservar',
@@ -16,11 +19,12 @@ export class ReservarComponent implements OnInit {
   citasDisponibles: ICita[] = [];
   medicoId: number = 0;
   medico!: IMedico;
- 
+  user!: IUsuario;
 
 
-  constructor(private citas: CitasService, private route: ActivatedRoute, private medicoService: MedicoService, private toastr: ToastrService) { }
-  
+
+  constructor(private citas: CitasService, private route: ActivatedRoute, private medicoService: MedicoService, private toastr: ToastrService, private pago: PagoService, private mail: MailService, private usuarioS: UsuarioService) { }
+
   ngOnInit(): void {
     this.medicoId = this.route.snapshot.params['id'];
 
@@ -33,6 +37,10 @@ export class ReservarComponent implements OnInit {
 
     });
 
+    this.usuarioS.getUsuarioById(this.currentUserId).subscribe((res) => {
+      this.user = res;
+    })
+
 
   }
 
@@ -42,9 +50,9 @@ export class ReservarComponent implements OnInit {
 
   }
 
-  get currentUserId(){
+  get currentUserId() {
     const tokenDataString = localStorage.getItem('currentUser');
-    if(tokenDataString){
+    if (tokenDataString) {
       const tokenData = JSON.parse(tokenDataString);
       const id = tokenData.id;
 
@@ -52,37 +60,108 @@ export class ReservarComponent implements OnInit {
     }
   }
 
-  showSuccess(){
+  showSuccess() {
     this.toastr.success('Éxito', 'Cita reservada correctamente');
   }
 
-  showError(){
+  showError() {
     this.toastr.error('Fracaso', 'Hubo un error al reservar');
   }
 
   reservarCita(cita: ICita, observacion: string) {
-    console.log(observacion)
+
+
     let userId = this.currentUserId;
-    console.log(userId)
-    console.log(cita)
-    
+
+
     cita.UsuarioId = userId;
     cita.libre = false;
-    if(observacion != null){
+    if (observacion != null) {
       cita.observacion = observacion
     }
 
-    this.citas.updateCita(cita, cita.id).subscribe((res)=>{
+    this.citas.updateCita(cita, cita.id).subscribe((res) => {
       this.showSuccess();
+      let body = {
+        nombre1: this.user.nombre,
+        apellido1: this.user.apellido,
+        nombre2: this.medico.nombre,
+        apellido2: this.medico.apellido,
+        email1: this.user.email,
+        email2: this.medico.email,
+        fecha: cita.fecha,
+        hora1: cita.hora_inicio,
+        hora2: cita.hora_termino
+      }
+      this.mail.correoReservar(body).subscribe((res) => {
+        console.log('mail enviado');
+
+      })
+
     },
-    (error)=>{
-      this.showError();
-    })
-    
+      (error) => {
+        this.showError();
+      })
+
 
   }
 
   reservarPagarCita(cita: ICita, observacion: string) {
     //redireccionar a pagos y luego actualizar estado de pago en cita si es exitoso 
+    let idUser = this.currentUserId;
+    let redirection = 'http://localhost:4200/#/citas';
+    //let redirection = 'http://pacheco.chillan.ubiobio.cl:81/#/citas'; 
+
+    cita.UsuarioId = idUser;
+    cita.libre = false;
+    cita.pagada = true;
+
+    if (observacion != null) {
+      cita.observacion = observacion
+    }
+
+    this.citas.updateCita(cita, cita.id).subscribe((res) => {
+
+      let body = {
+        nombre1: this.user.nombre,
+        apellido1: this.user.apellido,
+        nombre2: this.medico.nombre,
+        apellido2: this.medico.apellido,
+        email1: this.user.email,
+        email2: this.medico.email,
+        fecha: cita.fecha,
+        hora1: cita.hora_inicio,
+        hora2: cita.hora_termino
+      }
+
+      this.pago.pagar(idUser, cita.id, redirection).subscribe((res) => {
+
+
+        window.location.href = res.body;
+
+        this.mail.correoReservar(body).subscribe((res) => {
+          console.log('mail enviado');
+    
+    
+    
+        },
+          (error) => {
+            this.showError();
+          });
+
+
+      },
+        (error) => {
+          console.log(error);
+          this.showError();
+
+
+        })
+
+    })
+
+
+
+
   }
 }

@@ -20,5 +20,15 @@ export class MailService {
   showNotification() {
     this.toats.success('¡Hemos enviado tu correo a resermed!');
   }
+
+  correoCancelar(body = {}):Observable<any>{
+
+    return this.http.post<any>(`${base_url}/cancelar`,body);
+  }
+
+  correoReservar(body = {}):Observable<any>{
+
+    return this.http.post<any>(`${base_url}/mailReservar`,body);
+  }
   
 }

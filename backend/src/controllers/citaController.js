@@ -1,10 +1,21 @@
 import { Cita } from "../models/Cita.js";
-import {Medico} from "../models/Medico.js";
+import { Medico } from "../models/Medico.js";
+import { Usuario } from "../models/Usuario.js";
 import { Op } from "sequelize";
 
 export const getCitas = async (req, res) => {
     try {
-        const citas = await Cita.findAll();
+        const citas = await Cita.findAll({
+            include: [
+                {
+                    model: Usuario,
+
+                },
+                {
+                    model: Medico,
+                }
+            ]
+        });
         res.status(200).json(citas);
     } catch (error) {
         res.status(500).json({ message: "Error al obtener citas." });
@@ -20,23 +31,23 @@ export const getCitaById = async (req, res) => {
     }
 };
 
-export const getCitasById = async (req,res) =>{
+export const getCitasById = async (req, res) => {
     let usId = req.params.id;
     try {
         const citasByIdMedico = await Cita.findAll({
-            include: [Medico],
+            include: [Medico, Usuario],
             where: {
                 UsuarioId: usId
             },
-            attributes: ['id','Medico.id','Medico.nombre','Medico.apellido','Medico.especialidad','Medico.img_url','fecha','hora_inicio','hora_termino'],
-            order: [['fecha','ASC']]
+            attributes: ['id', 'Medico.id', 'Medico.nombre', 'Medico.apellido', 'Medico.especialidad', 'Medico.img_url', 'fecha', 'hora_inicio', 'hora_termino','Usuario.id' , 'Usuario.nombre', 'Usuario.apellido', 'Usuario.email'],
+            order: [['fecha', 'ASC']]
         });
         res.status(200).json(citasByIdMedico)
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: error });
     }
-} 
+}
 
 export const createCita = async (req, res) => {
 
@@ -83,7 +94,7 @@ export const deleteCita = async (req, res) => {
             },
         });
 
-        return res.status(200).json({ message: "oki :3"});
+        return res.status(200).json({ message: "oki :3" });
     } catch (error) {
         return res.status(500).json({ message: "Error interno del servidor" });
     }
@@ -121,7 +132,7 @@ export const updateCita = async (req, res) => {
             },
         });
 
-        return res.status(200).json( { message: "oki :3"} );
+        return res.status(200).json({ message: "oki :3" });
     } catch (error) {
         return res.status(500).json({ message: "Error interno del servidor" });
     }
@@ -135,20 +146,38 @@ export const getCitasOcupadasById = async (req, res) => {
 
     try {
 
-        if(rol === "usuario"){
+        if (rol === "usuario") {
             user = await Cita.findAll({
                 where: {
                     UsuarioId: id
-                }
+                },
+                include: [
+                    {
+                        model: Usuario,
+
+                    },
+                    {
+                        model: Medico,
+                    }
+                ]
             })
-        }else if(rol === "medico"){
-                user = await Cita.findAll({
+        } else if (rol === "medico") {
+            user = await Cita.findAll({
                 where: {
                     UsuarioId: {
                         [Op.not]: null
                     },
                     MedicoId: id
-                }
+                },
+                include: [
+                    {
+                        model: Usuario,
+
+                    },
+                    {
+                        model: Medico,
+                    }
+                ]
             })
         }
 
@@ -158,36 +187,36 @@ export const getCitasOcupadasById = async (req, res) => {
     }
 }
 
-export const crarCitasSemana = async (req, res) =>{
+export const crarCitasSemana = async (req, res) => {
     try {
         const { id } = req.params;
         const { duracion, intervalo, protegido1, protegido2, jornadaI, jornadaT, costo } = req.body;
 
         const d = new Date();
         let day = d.getDay();
-        let Inicio = new Date("07/06/2021 "+jornadaI);
-        let Termino = new Date("07/06/2021 "+jornadaT);
-        let ProtegidoI = new Date("07/06/2021 "+protegido1);
-        let ProtegidoT = new Date("07/06/2021 "+protegido2);
+        let Inicio = new Date("07/06/2021 " + jornadaI);
+        let Termino = new Date("07/06/2021 " + jornadaT);
+        let ProtegidoI = new Date("07/06/2021 " + protegido1);
+        let ProtegidoT = new Date("07/06/2021 " + protegido2);
 
         let protec = minutesDiff(ProtegidoT, ProtegidoI);
         let minMñn = minutesDiff(ProtegidoI, Inicio);
         let minTarde = minutesDiff(Termino, ProtegidoT);
         let citasMñn, citasTarde, dif;
 
-        if(parseInt(intervalo) == 0){
-            citasMñn = Math.floor(minMñn/parseInt(duracion));
-            citasTarde = Math.floor(minTarde/parseInt(duracion));
-        }else{
-            citasMñn = Math.floor(minMñn/(parseInt(duracion) + parseInt(intervalo)));
-            citasTarde = Math.floor(minTarde/(parseInt(duracion) + parseInt(intervalo)));
+        if (parseInt(intervalo) == 0) {
+            citasMñn = Math.floor(minMñn / parseInt(duracion));
+            citasTarde = Math.floor(minTarde / parseInt(duracion));
+        } else {
+            citasMñn = Math.floor(minMñn / (parseInt(duracion) + parseInt(intervalo)));
+            citasTarde = Math.floor(minTarde / (parseInt(duracion) + parseInt(intervalo)));
         }
         var today = new Date();
 
-        while(day != 0 && day != 6){
-            if(parseInt(intervalo) == 0){
+        while (day != 0 && day != 6) {
+            if (parseInt(intervalo) == 0) {
 
-                for(let i = 0; i < citasMñn; i++){
+                for (let i = 0; i < citasMñn; i++) {
                     let inicio = Inicio.getHours() + ":" + Inicio.getMinutes();
                     addMinutes(Inicio, parseInt(duracion));
                     let termino = Inicio.getHours() + ":" + Inicio.getMinutes();
@@ -204,19 +233,19 @@ export const crarCitasSemana = async (req, res) =>{
                     })
                 }
 
-                if(Inicio.getHours() < ProtegidoI.getHours()){
+                if (Inicio.getHours() < ProtegidoI.getHours()) {
                     dif = minutesDiff(ProtegidoI, Inicio);
 
                     addMinutes(Inicio, parseInt(dif));
-                    
+
                     addMinutes(Inicio, protec)
-                }else if(Inicio.getHours() == ProtegidoI.getHours()){
+                } else if (Inicio.getHours() == ProtegidoI.getHours()) {
                     dif = minutesDiff(ProtegidoT, Inicio);
 
                     addMinutes(Inicio, dif);
                 }
 
-                for(let i = 0; i < citasTarde; i++){
+                for (let i = 0; i < citasTarde; i++) {
                     let inicio = Inicio.getHours() + ":" + Inicio.getMinutes();
                     addMinutes(Inicio, parseInt(duracion));
                     let termino = Inicio.getHours() + ":" + Inicio.getMinutes();
@@ -233,8 +262,8 @@ export const crarCitasSemana = async (req, res) =>{
                     })
                 }
 
-            }else{
-                for(let i = 0; i < citasMñn; i++){
+            } else {
+                for (let i = 0; i < citasMñn; i++) {
                     let inicio = Inicio.getHours() + ":" + Inicio.getMinutes();
                     console.log(inicio)
                     addMinutes(Inicio, parseInt(duracion));
@@ -255,20 +284,20 @@ export const crarCitasSemana = async (req, res) =>{
                     })
                 }
 
-                if(Inicio.getHours() < ProtegidoI.getHours()){
+                if (Inicio.getHours() < ProtegidoI.getHours()) {
                     dif = minutesDiff(ProtegidoI, Inicio);
 
                     addMinutes(Inicio, parseInt(dif));
-                    
+
                     addMinutes(Inicio, protec)
 
-                }else if(Inicio.getHours() == ProtegidoI.getHours()){
+                } else if (Inicio.getHours() == ProtegidoI.getHours()) {
                     dif = minutesDiff(ProtegidoT, Inicio);
 
                     addMinutes(Inicio, dif);
                 }
 
-                for(let i = 0; i < citasTarde; i++){
+                for (let i = 0; i < citasTarde; i++) {
                     let inicio = Inicio.getHours() + ":" + Inicio.getMinutes();
                     console.log(inicio);
                     addMinutes(Inicio, parseInt(duracion));
@@ -290,23 +319,23 @@ export const crarCitasSemana = async (req, res) =>{
                 }
             }
 
-            Inicio = new Date("01 Jan 1970 "+jornadaI);
-            Termino = new Date("01 Jan 1970 "+jornadaT); 
+            Inicio = new Date("01 Jan 1970 " + jornadaI);
+            Termino = new Date("01 Jan 1970 " + jornadaT);
             today.setDate(today.getDate() + 1);
             day++;
 
         }
         return res.status(200).json({ message: "Oki" });
     } catch (error) {
-        return res.status(500).json({ message: "Error interno del servidor"});
+        return res.status(500).json({ message: "Error interno del servidor" });
     }
 }
 
-function addMinutes(date, minutes){
+function addMinutes(date, minutes) {
     return date.setMinutes(date.getMinutes() + minutes);
 }
 function minutesDiff(dateTimeValue2, dateTimeValue1) {
-   var differenceValue =(dateTimeValue2.getTime() - dateTimeValue1.getTime()) / 1000;
-   differenceValue /= 60;
+    var differenceValue = (dateTimeValue2.getTime() - dateTimeValue1.getTime()) / 1000;
+    differenceValue /= 60;
     return Math.abs(Math.round(differenceValue));
 }

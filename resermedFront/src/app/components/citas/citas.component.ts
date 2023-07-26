@@ -15,6 +15,7 @@ export class CitasComponent implements OnInit{
   proxCita!:any;
   citaActual!:any;
   imgProx:string = '';
+  direccion: string = '';
   constructor(public modalService: ModalDetallesService, private citaSer: CitasService){
     
     
