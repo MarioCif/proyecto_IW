@@ -39,3 +39,11 @@ i {
     font-size: 30px;
     margin-left: 20px;
 }
+
+@media screen and (max-width: 800px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
