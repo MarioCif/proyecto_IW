@@ -54,3 +54,47 @@ $font: 'Nunito', sans-serif;
         margin-top: 3vh;
     }
 }
+
+.detalles-btn{
+    flex-direction: column;
+}
+
+.btn-cancelar {
+    background: linear-gradient(to right, #c24949 0%, #c24949 50%, #752020 50%, #752020 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    background-size: 200% 100%;
+    transition: background-position 0.3s ease;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.btn-cancelar:hover {
+    background-position: -100% 0;
+}
+
+.btn-pagar {
+    background: linear-gradient(to right, #4C7AAF 0%, #4C7AAF 50%, #00336d 50%, #00336d 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    background-size: 200% 100%;
+    transition: background-position 0.3s ease;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.btn-pagar:hover {
+    background-position: -100% 0;
+}

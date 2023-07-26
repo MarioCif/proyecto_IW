@@ -5,16 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DateFilterPipe implements PipeTransform {
 
-  // transform(items: any[], term: string): any[] {
-  //   console.log(term);
-  //   if (!term) {
-  //     return items;
-  //   }
-
-  //   return items.filter(item => 
-  //     item.direccion.toLowerCase().includes(term.toLowerCase())
-  //     );
-  // }
 
   transform(items: any[], targetDate: Date): any[] {
     if (!items || !Array.isArray(items) || !targetDate || typeof targetDate !== 'string') {

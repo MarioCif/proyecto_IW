@@ -48,6 +48,7 @@ export const login = async (req, res) => {
         const payload = {
             id: user.id,
             nombre: user.nombre,
+            apellido: user.apellido,
             email: user.email,
             userType: userType
         }

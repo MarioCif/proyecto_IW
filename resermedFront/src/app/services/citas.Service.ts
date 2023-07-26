@@ -37,4 +37,8 @@ export class CitasService {
     getCitaById(id: number): Observable<any>{
         return this.http.get<any>(`${this.api_url}/citas/${id}`);
     }
+
+    deleteCita(id:number): Observable<any>{
+        return this.http.delete<any>(`${this.api_url}/citas/${id}`);
+    }
 }
