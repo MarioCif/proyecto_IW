@@ -21,7 +21,7 @@ export const getPagoUsuarioAuthenticado = async (req, res) => {
         const citaExistente = await Cita.findOne({
             where: {
                 UsuarioId: idUser,
-                id: idCita
+                id: idCita,
             }
         });
         console.log(citaExistente);
@@ -60,7 +60,7 @@ export const getPagoUsuarioAuthenticado = async (req, res) => {
                 mercadopago.preferences.create(preference).then(function (response) {
                     console.log(response.body);
                     
-                    res.status(201).json({ body: response.body });
+                    res.status(201).json({ body: response.body.init_point });
                     
                 }).catch(function (error) {
                     console.log(error);

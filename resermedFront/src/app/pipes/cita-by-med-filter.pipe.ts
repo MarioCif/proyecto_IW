@@ -6,7 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class CitaByMedFilterPipe implements PipeTransform {
 
   transform(items: any[], medicoId: number | null ): any[] {
-    console.log(medicoId)
     if (medicoId == null) {
       return items;
     }
